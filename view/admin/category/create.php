@@ -25,7 +25,7 @@
                             <div class="mb-4 row align-items-center">
                                 <div class="col-sm-13">
                                     <label class="form-label-title col-sm-3 mb-0">Tên danh mục</label>
-                                    <input class="form-control" type="text" name="name" placeholder="Category Name">
+                                    <input class="form-control" type="text" name="name" placeholder="Tên danh mục">
                                 </div>
                             </div>
 
@@ -49,9 +49,13 @@
                         <br>
                         <button type="submit" name="createCategory" class="btn btn-primary w-100">Thêm mới</button>
                     </div>
-                        <div class="col-lg-2">
+                    <div class="card">
+                            <div class="col-lg-2">
                             <a href="indext.php?act=category" class="btn btn-primary w-100">Quay lại</a>
                         </div>
+        
+                    </div>
+
                 </div>
             </div>
         </div>
