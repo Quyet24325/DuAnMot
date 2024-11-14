@@ -44,7 +44,7 @@
                                                 <td>
                                                     <div class="category">
                                                         <div class="category_image">
-                                                            <img src="admin/assets/images/product/3.png" width="80px" class="img-fluid" alt="">
+                                                            <img src="<?= $category['image'] ?>" width="80px" class="img-fluid">
                                                         </div>
                                                         <p><?= $category['name'] ?></p>
                                                     </div>
