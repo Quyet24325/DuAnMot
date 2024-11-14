@@ -14,9 +14,9 @@
                             </div>
                             <div class="card-body">
                                 <input type="file" name="image" class="form-control">
-                                <?php if (isset($_SESSION['errors']['image'])) : ?>
+                                <?php if (isset($_SESSION['errors']['image'])) { ?>
                                     <p class="text-danger"><?= $_SESSION['errors']['image'] ?></p>
-                                <?php endif ?>
+                                <?php } ?>
                             </div>
 
                         </div>
@@ -30,7 +30,7 @@
                                 <div class="mb-4 row align-items-center">
                                     <div class="col-sm-13">
                                         <label class="form-label-title col-sm-3 mb-0">Tên danh mục</label>
-                                        <input class="form-control" type="text" name="name" placeholder="Category Name">
+                                        <input class="form-control" type="text" name="name" placeholder="Tên danh mục">
                                     </div>
                                 </div>
                                 <?php if (isset($_SESSION['errors']['name'])) { ?>

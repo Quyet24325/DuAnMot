@@ -44,7 +44,7 @@
                                                 <td>
                                                     <div class="category">
                                                         <div class="category_image">
-                                                            <img src="<?= $category['image'] ?>" width="80px" class="img-fluid">
+                                                            <img src="./images/category/<?=$category['image']?>" width="80px" class="img-fluid">
                                                         </div>
                                                         <p><?= $category['name'] ?></p>
                                                     </div>
@@ -67,8 +67,7 @@
                                                         </li>
 
                                                         <li>
-                                                            <a href="indext.php?act=category_delete&id=<?= $category['cate_id'] ?>" data-bs-toggle="modal"
-                                                                data-bs-target="#exampleModalToggle">
+                                                            <a onclick="return confirm('Bạn có chắc chắn xóa không?') " href="indext.php?act=category_delete&id=<?= $category['cate_id'] ?>" >
                                                                 <i class="ri-delete-bin-line"></i>
                                                             </a>
                                                         </li>
