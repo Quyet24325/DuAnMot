@@ -11,7 +11,7 @@
                             <div class="right-options">
                                 <ul>
                                     <li>
-                                        <a class="btn btn-solid" href="add-new-product.html">Thêm sản phẩm</a>
+                                        <a class="btn btn-solid" href="indext.php?act=product_create">Thêm sản phẩm</a>
                                     </li>
                                 </ul>
                             </div>
@@ -21,17 +21,17 @@
                                 <table class="table all-package theme-table table-product" id="table_id">
                                     <thead>
                                         <tr>
-                                            <th>Product Image</th>
-                                            <th>Product Name</th>
-                                            <th>Category</th>
-                                            <th>Current Qty</th>
-                                            <th>Price</th>
-                                            <th>Status</th>
-                                            <th>Option</th>
+                                            <th>Ảnh sản phẩm</th>
+                                            <th>Tên sản phẩm và biến thể</th>
+                                            <th>Danh mục</th>
+                                            <th>Giá sản phẩm</th>
+                                            <th>Khuyến mại</th>
+                                            <th>Thao tác</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
+                                        <?php foreach ($getProduct as $product) { ?>                                   
                                         <tr>
                                             <td>
                                                 <div class="table-image">
@@ -40,41 +40,30 @@
                                                 </div>
                                             </td>
 
-                                            <td>Aata Buscuit</td>
+                                            <td><?=$product['name']?></td>
 
-                                            <td>Buscuit</td>
+                                            <td><?=$product['cate_id']?></td>
 
-                                            <td>12</td>
+                                            <td><?=$product['price']?></td>
 
-                                            <td class="td-price">$95.97</td>
-
-                                            <td class="status-danger">
-                                                <span>Pending</span>
-                                            </td>
-
+                                            <td><?=$product['sale_price']?></td>
                                             <td>
                                                 <ul>
                                                     <li>
-                                                        <a href="order-detail.html">
-                                                            <i class="ri-eye-line"></i>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="javascript:void(0)">
+                                                        <a href="indext.php?act=product_edit&id=<?= $product['pro_id'] ?>">
                                                             <i class="ri-pencil-line"></i>
                                                         </a>
                                                     </li>
 
                                                     <li>
-                                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModalToggle">
+                                                        <a href="indext.php?act=product_delete&id=<?= $product['pro_id'] ?>">
                                                             <i class="ri-delete-bin-line"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </td>
                                         </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>

@@ -1,6 +1,5 @@
 <?php include '../view/admin/layout/header.php' ?>
 <div class="page-body">
-
     <!-- New Product Add Start -->
     <div class="container-fluid">
         <div class="row">

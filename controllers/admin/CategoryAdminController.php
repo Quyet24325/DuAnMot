@@ -21,7 +21,7 @@ class CategoryAdminController extends Category
             if (empty($_POST['description'])) {
                 $errors['description'] = 'Vui lòng nhập mô tả';
             }
-            if (!isset($_FILES['image']) || $_FILES['image']['errors'] !== UPLOAD_ERR_OK) {
+            if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
                 $errors['image'] = 'Vui lòng chọn file ảnh';
             }
 
@@ -74,7 +74,6 @@ class CategoryAdminController extends Category
             }
 
             $_SESSION['errors'] = $errors;
-
             $file = $_FILES['image'];
             $images = $file['name'];
             if ($file['size'] > 0) {

@@ -1,7 +1,10 @@
 <?php
 session_start();
+
 require_once '../controllers/admin/CategoryAdminController.php';
+require_once '../controllers/admin/ProductAdminController.php';
 $categoryAdmin = new CategoryAdminController();
+$productAdmin = new ProductAdminController();
 $action = isset($_GET['act']) ? $_GET['act'] : 'indext';
 switch ($action) {
         // ============ADMIN=============
@@ -9,10 +12,13 @@ switch ($action) {
         include '../view/admin/indext.php';
         break;
     case 'product':
-        include '../view/admin/product/list.php';
+        $productAdmin->indext();
         break;
     case 'product_create':
-        include '../view/admin/product/create.php';
+        $productAdmin->createProduct();
+        break;
+    case 'product_postCreate':
+        $productAdmin->postCreate();
         break;
     case 'product_edit':
         include '../view/admin/product/edit.php';
@@ -25,11 +31,11 @@ switch ($action) {
         break;
     case 'category_edit':
         $categoryAdmin->updateCategory();
-        
+
         break;
-        case 'category_delete':
-            $categoryAdmin->deleteCategory();
-            break;
+    case 'category_delete':
+        $categoryAdmin->deleteCategory();
+        break;
 
         // ============CLIENT=============
     case 'indext':
