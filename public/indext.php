@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+session_destroy();
 require_once '../controllers/admin/CategoryAdminController.php';
 require_once '../controllers/admin/ProductAdminController.php';
 $categoryAdmin = new CategoryAdminController();
@@ -20,8 +20,17 @@ switch ($action) {
     case 'product_postCreate':
         $productAdmin->postCreate();
         break;
+    case 'update_product':
+        $productAdmin->update();
+        break;
     case 'product_edit':
-        include '../view/admin/product/edit.php';
+        $productAdmin->edit();
+        break;
+    case 'delete_image_gallery':
+        $productAdmin->delete_image_gallery();
+        break;
+    case 'delete_variant':
+        $productAdmin->delete_variant();
         break;
     case 'category':
         $categoryAdmin->index();

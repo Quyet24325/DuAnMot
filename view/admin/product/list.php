@@ -31,22 +31,37 @@
                                     </thead>
 
                                     <tbody>
-                                        <?php foreach ($getProduct as $product) { ?>                                   
+                                        <?php foreach ($listProduct as $product) { ?>                                   
                                         <tr>
                                             <td>
                                                 <div class="table-image">
-                                                    <img src="admin/assets/images/product/1.png" class="img-fluid"
+                                                    <img src="./images/product/<?= $product['pro_image'] ?>" class="img-fluid"
                                                         alt="">
                                                 </div>
                                             </td>
 
-                                            <td><?=$product['name']?></td>
+                                            <td class="text-start">
+                                                <h3 style="font-weight: bold;" class="mb-2"><?=$product['pro_name']?></h3>
+                                                <p class="mb-0">
+                                                    <span>Dung lượng : </span>
+                                                    <?php foreach ($product['variants'] as $size) { ?>
+                                                       <span><?= $size['variant_size'] ?></span>
+                                                    <?php } ?>
+                                                </p>
+                                                <p>
+                                                    <span>Màu sắc : </span>
+                                                    <?php foreach ($product['variants'] as $color) { ?>
+                                                       <span><?= $color['variant_color'] ?></span>
+                                                    <?php } ?>
+                                                </p>
+                                            </td>
 
-                                            <td><?=$product['cate_id']?></td>
+                                            <td><?=$product['cate_name']?></td>
 
-                                            <td><?=$product['price']?></td>
+                                            <td><?=number_format($product['pro_price'] * 1000,0,',','.')?> VND</td>
 
-                                            <td><?=$product['sale_price']?></td>
+                                            <td><?=number_format($product['pro_sale_price'] * 1000,0,',','.')?> VND</td>
+
                                             <td>
                                                 <ul>
                                                     <li>

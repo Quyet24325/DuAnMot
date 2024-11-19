@@ -45,7 +45,7 @@
         <!-- Plugins JS -->
         <script src="admin/assets/js/sidebar-menu.js"></script>
         <script src="admin/assets/js/notify/bootstrap-notify.min.js"></script>
-        <script src="admin/assets/js/notify/index.js"></script>
+        <!-- <script src="admin/assets/js/notify/index.js"></script> -->
 
         <!-- Apexchar js -->
         <script src="admin/assets/js/chart/apex-chart/apex-chart1.js"></script>

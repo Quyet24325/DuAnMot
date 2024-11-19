@@ -1,7 +1,7 @@
 <?php include '../view/admin/layout/header.php' ?>
 <div class="page-body">
     <!-- New Product Add Start -->
-    <div class="container-fluid">
+    <div class="container-fluid theme-form theme-form-2 mega-form">
         <div class="row">
             <div class="col-12">
                 <form action="indext.php?act=category_create" method="post" enctype="multipart/form-data">
