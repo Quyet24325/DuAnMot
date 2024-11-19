@@ -104,7 +104,7 @@ class ProductAdminController extends product
     {
         $product = $this->getProductId($_GET['id']);
         $variant = $this->getProductVariantId($_GET['id']);
-        $gallery = $this->getProductGalleryId($_GET['id']);
+        $gallery = $this->getProductGalleryId();
         $listCategory = $this->getCategory();
         $listSize = $this->getAllSize();
         $listColor = $this->getAllColor();
@@ -226,8 +226,9 @@ class ProductAdminController extends product
     public function delete_image_gallery()
     {
         try {
-            if (file_exists('./images/gallery_product/' . $_POST['old_gallery_image'])) {
-                unlink('./images/gallery_product/' . $_POST['old_gallery_image']);
+            $gallery = $this->getProductGalleryId();
+            if (file_exists('./images/gallery_product/' . $gallery['image'])) {
+                unlink('./images/gallery_product/' . $gallery['image']);
             }
             $this->deleteImageGallery($_GET['id']);
             $_SESSION['success'] = "Xóa ảnh sản phẩm thành công";
@@ -243,16 +244,32 @@ class ProductAdminController extends product
     public function delete_variant()
     {
         try {
-            // echo "<pre>";
-            // print_r($_GET['var_id']);
-            // echo "</pre>";
-
             $this->deleteVariantProduct($_GET['var_id']);
             $_SESSION['success'] = "Xóa biến thể sản phẩm thành công";
             header("location:" . $_SERVER['HTTP_REFERER']);
             exit();
         } catch (\Throwable $th) {
             $_SESSION['errors'] = "Xóa biến thể sản phẩm thất bại.";
+            header("location:" . $_SERVER['HTTP_REFERER']);
+            exit();
+        }
+    }
+
+    public function deleteProduct()
+    {
+        try {
+            $galleries = $this->getProductGalleryId();
+            foreach ($galleries as $gallery) {
+                if (file_exists('./images/gallery_product/' . $gallery['image'])) {
+                    unlink('./images/gallery_product/' . $gallery['image']);
+                }
+            }
+            $this->deleteProductId();
+            $_SESSION['success'] = "Xóa sản phẩm thành công";
+            header("location:" . $_SERVER['HTTP_REFERER']);
+            exit();
+        } catch (\Throwable $th) {
+            $_SESSION['errors'] = "Xóa phẩm thất bại.";
             header("location:" . $_SERVER['HTTP_REFERER']);
             exit();
         }

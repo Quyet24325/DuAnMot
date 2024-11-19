@@ -131,11 +131,11 @@ class product extends connect
         $stmt->execute([$pro_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getProductGalleryId($pro_id)
+    public function getProductGalleryId()
     {
         $sql = "select * from product_galleries where pro_id=?";
         $stmt = $this->connect()->prepare($sql);
-        $stmt->execute([$pro_id]);
+        $stmt->execute([$_GET['id']]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -173,5 +173,11 @@ class product extends connect
         $sql = 'delete from product_variants where product_variants.var_id=?';
         $stmt = $this->connect()->prepare($sql);
         return $stmt->execute([$_GET['var_id']]);
+    }
+
+    public function deleteProductId() {
+        $sql='delete from products where pro_id=?';
+        $stmt=$this->connect()->prepare($sql);
+        return $stmt->execute([$_GET['id']]);
     }
 }
