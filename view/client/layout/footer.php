@@ -6,23 +6,23 @@
                 <div class="copyright mb-30">
                     <div class="footer-logo">
                         <a href="index.html">
-                            <img alt="" src="client/assets/img/logo/logo.png">
+                            <h2>DNQ</h2>
                         </a>
                     </div>
-                    <p>© 2021 <a href="#">Flone</a>.<br> All Rights Reserved</p>
+                    <p>© 2024 <a href="#">DNQ</a>.<br> All Rights Reserved</p>
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-4">
                 <div class="footer-widget mb-30 ml-30">
                     <div class="footer-title">
-                        <h3>ABOUT US</h3>
+                        <h3>VỀ CHÚNG TÔI</h3>
                     </div>
                     <div class="footer-list">
                         <ul>
-                            <li><a href="about.html">About us</a></li>
-                            <li><a href="#">Store location</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="#">Orders tracking</a></li>
+                            <li><a href="about.html">VỀ CHÚNG TÔI</a></li>
+                            <li><a href="#">Vị trí cửa hàng</a></li>
+                            <li><a href="contact.html">Liên hệ</a></li>
+                            <li><a href="#">Theo dõi đơn hàng</a></li>
                         </ul>
                     </div>
                 </div>
@@ -30,14 +30,14 @@
             <div class="col-lg-2 col-md-4 col-sm-4">
                 <div class="footer-widget mb-30 ml-50">
                     <div class="footer-title">
-                        <h3>USEFUL LINKS</h3>
+                        <h3>Liên kết</h3>
                     </div>
                     <div class="footer-list">
                         <ul>
-                            <li><a href="#">Returns</a></li>
-                            <li><a href="#">Support Policy</a></li>
-                            <li><a href="#">Size guide</a></li>
-                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Hoàn hàng</a></li>
+                            <li><a href="#">Chính sách hỗ trợ</a></li>
+                            <li><a href="#">Hướng dẫn kích thước</a></li>
+                            <li><a href="#">Câu hỏi thường gặp</a></li>
                         </ul>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
             <div class="col-lg-2 col-md-6 col-sm-6">
                 <div class="footer-widget mb-30 ml-75">
                     <div class="footer-title">
-                        <h3>FOLLOW US</h3>
+                        <h3>THEO DÕI CHÚNG TÔI</h3>
                     </div>
                     <div class="footer-list">
                         <ul>
@@ -60,19 +60,19 @@
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="footer-widget mb-30 ml-70">
                     <div class="footer-title">
-                        <h3>SUBSCRIBE</h3>
+                        <h3>ĐẶT MUA</h3>
                     </div>
                     <div class="subscribe-style">
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
+                        <p>Nhận email cập nhật về cửa hàng mới nhất và các ưu đãi đặc biệt của chúng tôi.</p>
                         <div id="mc_embed_signup" class="subscribe-form">
                             <form id="mc-embedded-subscribe-form" class="validate" novalidate="" target="_blank" name="mc-embedded-subscribe-form" method="post" action="https://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef">
                                 <div id="mc_embed_signup_scroll" class="mc-form">
-                                    <input class="email" type="email" required="" placeholder="Enter your email here.." name="EMAIL" value="">
+                                    <input class="email" type="email" required="" placeholder="Nhập email của bạn vào đây.." name="EMAIL" value="">
                                     <div class="mc-news" aria-hidden="true">
                                         <input type="text" value="" tabindex="-1" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef">
                                     </div>
                                     <div class="clear">
-                                        <input id="mc-embedded-subscribe" class="button" type="submit" name="subscribe" value="Subscribe">
+                                        <input id="mc-embedded-subscribe" class="button" type="submit" name="subscribe" value="ĐẶT MUA">
                                     </div>
                                 </div>
                             </form>
@@ -122,10 +122,10 @@
                     </div>
                     <div class="col-md-7 col-sm-12 col-xs-12">
                         <div class="product-details-content quickview-content">
-                            <h2>Products Name Here</h2>
+                            <h2>Điện thoại iPhone 16 Pro</h2>
                             <div class="product-details-price">
-                                <span>$18.00 </span>
-                                <span class="old">$20.00 </span>
+                                <span>28.899.000 đ </span>
+                                <span class="old">28.990.000 đ </span>
                             </div>
                             <div class="pro-details-rating-wrap">
                                 <div class="pro-details-rating">
@@ -137,14 +137,8 @@
                                 </div>
                                 <span>3 Reviews</span>
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisic elit eiusm tempor incidid ut labore et dolore magna aliqua. Ut enim ad minim venialo quis nostrud exercitation ullamco</p>
-                            <div class="pro-details-list">
-                                <ul>
-                                    <li>- 0.5 mm Dail</li>
-                                    <li>- Inspired vector icons</li>
-                                    <li>- Very modern style  </li>
-                                </ul>
-                            </div>
+                            <p>iPhone 16 Pro - Điện thoại cao cấp, bộ nhớ vượt trội
+                            iPhone 16 Pro là dòng sản phẩm mới ra mắt của Apple trong năm 2024 với nhiều ưu điểm ấn tượng, đáp ứng mọi nhu cầu của người dùng hiện đại. Sản phẩm sở hữu các tính năng cao cấp, từ camera đến màn hình, tạo nên một chiếc smartphone hoàn hảo cho những ai mong muốn trải nghiệm công nghệ tiên tiến.</p>
                             <div class="pro-details-size-color">
                                 <div class="pro-details-color-wrap">
                                     <span>Color</span>

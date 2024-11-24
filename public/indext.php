@@ -5,11 +5,14 @@ require_once '../controllers/admin/CategoryAdminController.php';
 require_once '../controllers/admin/ProductAdminController.php';
 require_once '../controllers/admin/UserAdminController.php';
 require_once '../controllers/admin/CouponAdminController.php';
+require_once '../controllers/client/homeController.php';
 $categoryAdmin = new CategoryAdminController();
 $productAdmin = new ProductAdminController();
 $userAdmin = new UserAdminController();
 $couponAdmin = new CouponAdminController();
 $action = isset($_GET['act']) ? $_GET['act'] : 'indext';
+//==========clinet=========
+$home = new homeController();
 switch ($action) {
         // ============ADMIN=============
     case 'admin':
@@ -81,12 +84,15 @@ switch ($action) {
 
         // ============CLIENT=============
     case 'indext':
-        include '../view/client/indext.php';
+        $home->index();
         break;
     case 'login':
         include '../view/client/auth/login.php';
         break;
     case 'regester':
         include '../view/client/auth/regester.php';
+        break;
+    case 'product_detail':
+        $home->getProductDetail();
         break;
 }

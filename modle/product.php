@@ -57,6 +57,7 @@ class product extends connect
                     products.price as pro_price,
                     products.sale_price as pro_sale_price,
                     products.image as pro_image,
+                    products.slug as pro_slug,
                     categories.cate_id as cate_id,
                     categories.name as cate_name,
                     product_variants.pro_id as product_variant_id,
@@ -179,5 +180,57 @@ class product extends connect
         $sql='delete from products where pro_id=?';
         $stmt=$this->connect()->prepare($sql);
         return $stmt->execute([$_GET['id']]);
+    }
+
+
+    public function getProductBySlug($slug) {
+        $sql = 'select
+                    products.pro_id as pro_id,
+                    products.name as pro_name,
+                    products.price as pro_price,
+                    products.sale_price as pro_sale_price,
+                    products.image as pro_image,
+                    products.slug as pro_slug,
+                    products.description as pro_description,    
+                    categories.cate_id as cate_id,
+                    categories.name as cate_name,
+                    product_variants.price as variant_price,
+                    product_variants.sale_price as variant_sale_price,
+                    product_variants.quantity as variant_quantity,
+                    variant_color.name as color_name,
+                    variant_size.name as size_name,
+                    product_galleries.image as product_gallery_image
+                from products
+                left join categories on products.cate_id = categories.cate_id
+                left join product_variants on products.pro_id = product_variants.pro_id
+                left join product_galleries on products.pro_id = product_galleries.pro_id
+                left join variant_color on product_variants.var_color_id = variant_color.var_color_id
+                left join variant_size on product_variants.var_size_id = variant_size.var_size_id
+                where products.slug=?';
+        
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$slug]);
+        $listProduct = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        $groupProduct = [];
+        foreach ($listProduct as $product) {
+            if (!isset($groupProduct[$product['pro_id']])) {
+                $groupProduct[$product['pro_id']] = $product;
+                $groupProduct[$product['pro_id']]['variants'] = [];
+                $groupProduct[$product['pro_id']]['product_gallery_images'] = [];
+            }
+            $groupProduct[$product['pro_id']]['variants'][] = [
+                'variant_color' => $product['color_name'],
+                'variant_size' => $product['size_name'],
+                'variant_price' => $product['variant_price'],
+                'variant_sale_price' => $product['variant_sale_price'],
+                'variant_quantity' => $product['variant_quantity'],
+            ];
+            if (!empty($product['product_gallery_image'])) {
+                $groupProduct[$product['pro_id']]['product_gallery_images'][] = $product['product_gallery_image'];
+            }
+        }
+    
+        return $groupProduct;
     }
 }
