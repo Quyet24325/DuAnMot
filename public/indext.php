@@ -3,8 +3,12 @@ session_start();
 session_destroy();
 require_once '../controllers/admin/CategoryAdminController.php';
 require_once '../controllers/admin/ProductAdminController.php';
+require_once '../controllers/admin/UserAdminController.php';
+require_once '../controllers/admin/CouponAdminController.php';
 $categoryAdmin = new CategoryAdminController();
 $productAdmin = new ProductAdminController();
+$userAdmin = new UserAdminController();
+$couponAdmin = new CouponAdminController();
 $action = isset($_GET['act']) ? $_GET['act'] : 'indext';
 switch ($action) {
         // ============ADMIN=============
@@ -33,7 +37,7 @@ switch ($action) {
         $productAdmin->delete_variant();
         break;
     case 'product_delete':
-$productAdmin->deleteProduct();
+        $productAdmin->deleteProduct();
         break;
     case 'category':
         $categoryAdmin->index();
@@ -47,6 +51,32 @@ $productAdmin->deleteProduct();
         break;
     case 'category_delete':
         $categoryAdmin->deleteCategory();
+        break;
+
+        // ============User=============
+    case 'user':
+        $userAdmin->user();
+        break;
+    case 'edit_user':
+        $userAdmin->edit();
+        break;
+    case 'update_role_user':
+        $userAdmin->updateRole();
+        break;
+
+
+        // ============COUPONS=============
+    case 'coupon':
+        $couponAdmin->getAllCoupons();
+        break;
+    case 'createrVoucher':
+        $couponAdmin->addCoupon();
+        break;
+    case 'editCoupon':
+        $couponAdmin->update();
+        break;
+    case 'delete':
+        $couponAdmin->delete();
         break;
 
         // ============CLIENT=============

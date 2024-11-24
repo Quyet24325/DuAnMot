@@ -107,6 +107,7 @@
                         </a>
                     </div>
                 </div>
+                
                 <div class="nav-right col-6 pull-right right-header p-0">
                     <ul class="nav-menus">
                         <li>
@@ -260,9 +261,6 @@
                                         <li>
                                             <a href="indext.php?act=product_create">Create</a>
                                         </li>
-                                        <li>
-                                            <a href="indext.php?act=product_edit">Edit</a>
-                                        </li>
                                     </ul>
                                 </li>
 
@@ -279,28 +277,26 @@
                                         <li>
                                             <a href="indext.php?act=category_create">Create</a>
                                         </li>
-                                        <li>
-                                            <a href="indext.php?act=category_edit">Edit</a>
-                                        </li>
+                                        
                                     </ul>
                                 </li>
 
 
 
-                                <!-- <li class="sidebar-list">
+                                <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" href="javascript:void(0)">
                                         <i class="ri-user-3-line"></i>
                                         <span>Users</span>
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="all-users.html">All users</a>
+                                            <a href="indext.php?act=user">All users</a>
                                         </li>
                                         <li>
                                             <a href="add-new-user.html">Add new user</a>
                                         </li>
                                     </ul>
-                                </li> -->
+                                </li>
 
                                 <!-- <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" href="javascript:void(0)">
@@ -324,7 +320,7 @@
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="order-list.html">Order List</a>
+                                            <a href="indext.php?act=order">Order List</a>
                                         </li>
                                         <li>
                                             <a href="order-detail.html">Order Detail</a>
@@ -344,7 +340,7 @@
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="coupon-list.html">Coupon List</a>
+                                            <a href="indext.php?act=coupon">Coupon List</a>
                                         </li>
 
                                         <li>

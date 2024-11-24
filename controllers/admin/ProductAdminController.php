@@ -227,8 +227,11 @@ class ProductAdminController extends product
     {
         try {
             $gallery = $this->getProductGalleryId();
-            if (file_exists('./images/gallery_product/' . $gallery['image'])) {
-                unlink('./images/gallery_product/' . $gallery['image']);
+
+            foreach ($gallery as $image) {
+                if (file_exists('./images/gallery_product/' . $image['image'])) {
+                    unlink('./images/gallery_product/' . $image['image']);
+                }
             }
             $this->deleteImageGallery($_GET['id']);
             $_SESSION['success'] = "Xóa ảnh sản phẩm thành công";
