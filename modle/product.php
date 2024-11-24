@@ -194,10 +194,12 @@ class product extends connect
                     products.description as pro_description,    
                     categories.cate_id as cate_id,
                     categories.name as cate_name,
+                    product_variants.var_id as variant_id,
                     product_variants.price as variant_price,
                     product_variants.sale_price as variant_sale_price,
                     product_variants.quantity as variant_quantity,
                     variant_color.name as color_name,
+                    variant_color.code as color_code,
                     variant_size.name as size_name,
                     product_galleries.image as product_gallery_image
                 from products
@@ -213,20 +215,37 @@ class product extends connect
         $listProduct = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
         $groupProduct = [];
+       
         foreach ($listProduct as $product) {
             if (!isset($groupProduct[$product['pro_id']])) {
                 $groupProduct[$product['pro_id']] = $product;
                 $groupProduct[$product['pro_id']]['variants'] = [];
                 $groupProduct[$product['pro_id']]['product_gallery_images'] = [];
             }
-            $groupProduct[$product['pro_id']]['variants'][] = [
-                'variant_color' => $product['color_name'],
-                'variant_size' => $product['size_name'],
-                'variant_price' => $product['variant_price'],
-                'variant_sale_price' => $product['variant_sale_price'],
-                'variant_quantity' => $product['variant_quantity'],
-            ];
-            if (!empty($product['product_gallery_image'])) {
+            
+            $exists = false;
+            foreach ($groupProduct[$product['pro_id']]['variants'] as $variant) {
+                if (
+                    $variant['variant_color'] == $product['color_name'] &&  $variant['variant_size'] == $product['size_name']
+                ) {
+                    $exists = true;
+                    break;
+                }
+            }
+            if (!$exists) {
+                $groupProduct[$product['pro_id']]['variants'][] = [
+                    'variant_id' => $product['variant_id'],
+                    'variant_color' => $product['color_name'],
+                    'variant_color_code' => $product['color_code'],
+                    'variant_size' => $product['size_name'],
+                    'variant_price' => $product['variant_price'],
+                    'variant_sale_price' => $product['variant_sale_price'],
+                    'variant_quantity' => $product['variant_quantity'],
+                ];
+            }
+            
+            
+            if (!empty($product['product_gallery_image'] && !in_array($product['product_gallery_image'],$groupProduct[$product['pro_id']]['product_gallery_images']))) {
                 $groupProduct[$product['pro_id']]['product_gallery_images'][] = $product['product_gallery_image'];
             }
         }

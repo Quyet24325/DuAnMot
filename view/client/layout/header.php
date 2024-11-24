@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="client/assets/css/plugins.css">
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="client/assets/css/style.css">
+    <link rel="stylesheet" href="client/assets/css/main.css">
 </head>
 
 <body>

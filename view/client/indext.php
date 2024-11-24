@@ -95,7 +95,7 @@
                             <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div class="product-wrap mb-25">
                                     <div class="product-img">
-                                        <a href="?act=product_detail&slug=<?= $pro['pro_slug'] ?>">
+                                        <a href="indext.php?act=product_detail&slug=<?= $pro['pro_slug'] ?>">
                                             <img src="./images/product/<?= $pro['pro_image'] ?>" alt="product-category">
                                         </a>
                                         <div class="product-action">
@@ -112,13 +112,13 @@
                                     </div>
                                     <div class="product-content text-center">
                                         <h3><a href="?act=product_detail&slug=<?= $pro['pro_slug'] ?>"><?= $pro['pro_name'] ?></a></h3>
-                                        <div class="product-rating">
+                                        <!-- <div class="product-rating">
                                             <i class="fa fa-star-o yellow"></i>
                                             <i class="fa fa-star-o yellow"></i>
                                             <i class="fa fa-star-o yellow"></i>
                                             <i class="fa fa-star-o yellow"></i>
                                             <i class="fa fa-star-o"></i>
-                                        </div>
+                                        </div> -->
                                         <div class="product-price">
                                             <span class="old"><?= number_format($pro['pro_price'] * 1000, 0, ',', '.') ?>đ</span>
                                             <span><?= number_format($pro['pro_sale_price'] * 1000, 0, ',', '.') ?>đ</span>
