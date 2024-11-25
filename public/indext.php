@@ -1,18 +1,26 @@
 <?php
 session_start();
-session_destroy();
+
+//==========Admin=========
 require_once '../controllers/admin/CategoryAdminController.php';
 require_once '../controllers/admin/ProductAdminController.php';
 require_once '../controllers/admin/UserAdminController.php';
 require_once '../controllers/admin/CouponAdminController.php';
+require_once '../controllers/admin/OrderAdminController.php';
+//==========clinet=========
 require_once '../controllers/client/homeController.php';
+
+
+//==========Admin=========
 $categoryAdmin = new CategoryAdminController();
 $productAdmin = new ProductAdminController();
 $userAdmin = new UserAdminController();
 $couponAdmin = new CouponAdminController();
-$action = isset($_GET['act']) ? $_GET['act'] : 'indext';
+$orderAdmin = new OrderAdminController();
+
 //==========clinet=========
 $home = new homeController();
+$action = isset($_GET['act']) ? $_GET['act'] : 'indext';
 switch ($action) {
         // ============ADMIN=============
     case 'admin':
@@ -66,6 +74,13 @@ switch ($action) {
     case 'update_role_user':
         $userAdmin->updateRole();
         break;
+
+        // ============Order=============
+    case 'order':
+        $orderAdmin->listOrder();
+        break;
+
+
 
 
         // ============COUPONS=============

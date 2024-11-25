@@ -264,4 +264,6 @@
     </script>
 
 </div>
-<?php include '../view/admin/layout/footer.php' ?>
+<?php 
+unset($_SESSION['errors']);  
+include '../view/admin/layout/footer.php' ?>

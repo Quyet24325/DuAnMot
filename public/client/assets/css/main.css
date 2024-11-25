@@ -17241,16 +17241,16 @@ product all slider
   -o-transition: all 0.2s 0s linear;
   transition: all 0.2s 0s linear;
 }
-/* .tp-product-details-variation-list button.tp-size-variation-btn:hover, .tp-product-details-variation-list button.tp-size-variation-btn.active {
+.tp-product-details-variation-list button.tp-size-variation-btn:hover, .tp-product-details-variation-list button.tp-size-variation-btn.active {
   box-shadow: none;
   border-color: var(--tp-common-black);
   box-shadow: none;
   color: var(--tp-common-black);
-} */
-/* .tp-product-details-variation-list button:hover, .tp-product-details-variation-list button.active {
+}
+.tp-product-details-variation-list button:hover, .tp-product-details-variation-list button.active {
   box-shadow: 0px 1px 2px rgba(1, 15, 28, 0.2);
-} */
-/* .tp-product-details-variation-list button:hover span[data-bg-color], .tp-product-details-variation-list button.active span[data-bg-color] {
+}
+.tp-product-details-variation-list button:hover span[data-bg-color], .tp-product-details-variation-list button.active span[data-bg-color] {
   -webkit-transform: translate(-50%, -50%) scale(0.7);
   -moz-transform: translate(-50%, -50%) scale(0.7);
   -ms-transform: translate(-50%, -50%) scale(0.7);
@@ -17265,7 +17265,7 @@ product all slider
   -ms-transform: translateX(-50%) translateY(-6px);
   -o-transform: translateX(-50%) translateY(-6px);
   transform: translateX(-50%) translateY(-6px);
-} */
+}
 .tp-product-details-action-title {
   font-size: 16px;
   font-weight: 400;

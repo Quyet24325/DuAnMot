@@ -18,17 +18,23 @@
                                                 <label
                                                     class="form-label-title col-lg-2 col-md-3 mb-0">Tên mã giảm giá</label>
                                                 <div class="col-md-9 col-lg-10">
-                                                    <input class="form-control" type="text" name="name">
+                                                    <input class="form-control" type="text" name="name_coupon">
                                                 </div>
-                                                <?php if (isset($_SESSION['errors']['name'])) { ?>
-                                                    <p class="text-danger"><?= $_SESSION['errors']['name'] ?></p>
+                                                <?php if (isset($_SESSION['errors']['name_coupon'])) { ?>
+                                                    <p class="text-danger"><?= $_SESSION['errors']['name_coupon'] ?></p>
                                                 <?php } ?>
                                             </div>
                                             <div class="mb-4 row align-items-center">
                                                 <label
-                                                    class="form-label-title col-lg-2 col-md-3 mb-0">Kiểu giảm giá</label>
-                                                <div class="col-md-9 col-lg-10">
-                                                    <input class="form-control" type="text" name="type">
+                                                    class="form-label-title col-lg-2 col-md-3 mb-0">Loại giảm giá</label>
+                                                <div class="col-sm-3">
+                                                    <select class="form-control" name="type">
+                                                        <option value="">Chọn loại cho phiếu giảm giá </option>
+                                                        <!-- <option value="Free Shipping">Free Shipping</option> -->
+                                                        <option value="Percentage">Theo phần trăm</option>
+                                                        <option value="Fixed Amount">Giá cố định</option>
+                                                        <!-- <option value="Amount">Giảm theo giá tiền</option> -->
+                                                    </select>
                                                 </div>
                                                 <?php if (isset($_SESSION['errors']['type'])) { ?>
                                                     <p class="text-danger"><?= $_SESSION['errors']['type'] ?></p>
@@ -36,7 +42,17 @@
                                             </div>
                                             <div class="mb-4 row align-items-center">
                                                 <label
-                                                    class="col-lg-2 col-md-3 col-form-label form-label-title">Code</label>
+                                                    class="form-label-title col-lg-2 col-md-3 mb-0">Giá trị giảm</label>
+                                                <div class="col-md-9 col-lg-10">
+                                                    <input class="form-control" type="text" name="coupon_value" placeholder="Nhập giá trị giảm">
+                                                </div>
+                                                <?php if (isset($_SESSION['errors']['coupon_value'])) { ?>
+                                                    <p class="text-danger"><?= $_SESSION['errors']['coupon_value'] ?></p>
+                                                <?php } ?>
+                                            </div>
+                                            <div class="mb-4 row align-items-center">
+                                                <label
+                                                    class="col-lg-2 col-md-3 col-form-label form-label-title">Mã giảm giá</label>
                                                 <div class="col-md-9 col-lg-10">
                                                     <input class="form-control" type="text" name="coupon_code">
                                                 </div>
@@ -48,7 +64,7 @@
                                             <div class="mb-4 row align-items-center">
                                                 <label
                                                     class="col-lg-2 col-md-3 col-form-label form-label-title">Ngày bắt đầu</label>
-                                                <div class="col-md-9 col-lg-10">
+                                                <div class="col-md-9 col-lg-2">
                                                     <input class="form-control" type="date" name="star_date">
                                                 </div>
                                                 <?php if (isset($_SESSION['errors']['star_date'])) { ?>
@@ -59,7 +75,7 @@
                                             <div class="mb-4 row align-items-center">
                                                 <label
                                                     class="col-lg-2 col-md-3 col-form-label form-label-title">Ngày kết thúc</label>
-                                                <div class="col-md-9 col-lg-10">
+                                                <div class="col-md-9 col-lg-2">
                                                     <input class="form-control" type="date" name="end_date">
                                                 </div>
                                                 <?php if (isset($_SESSION['errors']['end_date'])) { ?>
@@ -80,11 +96,12 @@
                                             <div class="mb-4 row align-items-center">
                                                 <label
                                                     class="col-sm-2 col-form-label form-label-title">Trạng thái</label>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-2">
                                                     <select class="form-control" name="status">
                                                         <option value="">Chọn trạng thái</option>
                                                         <option value="Hidden">Ẩn</option>
                                                         <option value="Active">Hiện</option>
+                                                        <option value="Future Plan">Future</option>
                                                     </select>
                                                 </div>
                                                 <?php if (isset($_SESSION['errors']['status'])) { ?>
@@ -113,4 +130,6 @@
     </div>
     <!-- Create Coupon Table End -->
 </div>
-<?php include '../view/admin/layout/footer.php'; ?>
+<?php 
+unset($_SESSION['errors']);  
+include '../view/admin/layout/footer.php'; ?>

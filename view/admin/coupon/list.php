@@ -26,7 +26,7 @@
                                             <tr>
                                                 <th>Tên phiếu giảm giá</th>
                                                 <th>Loại phiếu</th>
-                                                <th>Code</th>
+                                                <th>Mã giảm</th>
                                                 <th>Ngày bắt đầu</th>
                                                 <th>Ngày kết thúc</th>
                                                 <th>Số lượng</th>
@@ -39,14 +39,25 @@
                                             <?php foreach ($getCoupon as $coupon) { ?>
                                                 <tr>
                                                     <td><?= $coupon['name'] ?></td>
-                                                    <td ><?= $coupon['type'] ?></td>
+                                                    <?php if ($coupon['type'] == 'Percentage') { ?>
+                                                        <td><?= $coupon['coupon_value'] ?>%</td>
+                                                    <?php } else { ?>
+                                                        <td><?= number_format($coupon['coupon_value'] * 1000, 0, ',', '.') ?>đ</td>
+                                                    <?php } ?>
                                                     <td><?= $coupon['coupon_code'] ?></td>
                                                     <td><?= $coupon['star_date'] ?></td>
                                                     <td><?= $coupon['end_date'] ?></td>
                                                     <td><?= $coupon['quantity'] ?></td>
                                                     <td class="menu-status">
-                                                        <span class="<?= $coupon['status'] == 'Hidden' ? 'danger' :'success' ?>"><?= $coupon['status'] ?></span>
-                                                    </td>
+                                                    <?php if ($coupon['status'] == 'Active') { ?>                                                   
+                                                        <span class="success">Active</span>                                                    
+                                                    <?php } elseif ($coupon['status'] == 'Hidden') { ?>                                                      
+                                                        <span class="danger">Hidden</span>                                                   
+                                                    <?php } else{ ?>                                                       
+                                                        <span class="success">FuturePplan</span>                                                      
+                                                    <?php } ?>
+                                                     </td>
+                                                
                                                     <td>
                                                         <ul>
                                                             <li>
@@ -56,7 +67,7 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="indext.php?act=delete&id=<?= $coupon['cou_id'] ?>"  onclick="return confirm('Bạn có muốn xóa coupon này không?')">
+                                                                <a href="indext.php?act=delete&id=<?= $coupon['cou_id'] ?>" onclick="return confirm('Bạn có muốn xóa coupon này không?')">
                                                                     <i class="ri-delete-bin-line"></i>
                                                                 </a>
                                                             </li>

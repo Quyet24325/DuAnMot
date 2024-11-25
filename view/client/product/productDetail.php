@@ -67,12 +67,17 @@
                             <h4 class="tp-product-details-variation-title">Color :</h4>
                             <div class="tp-product-details-variation-list">
                                 <?php foreach ($productDetail['variants'] as $variant) { ?>
-                                    <button type="button" class="color tp-color-variation-btn <?= $variant['variant_color_code'] == 'click' ? 'active' : '' ?>">
-                                        <span data-bg-color="<?= $variant['variant_color_code'] ?>" style="background-color: <?= $variant['variant_color_code'] ?>;" class="border"></span>
+                                    <button type="button"
+                                        class="color tp-color-variation-btn"
+                                        data-color="<?= $variant['variant_color_code'] ?>">
+                                        <span data-bg-color="<?= $variant['variant_color_code'] ?>"
+                                            style="background-color: <?= $variant['variant_color_code'] ?>;"
+                                            class="border"></span>
                                     </button>
                                 <?php } ?>
                             </div>
                         </div>
+
                     </div>
                     <div class="tp-product-details-variation">
                         <!-- single item -->
@@ -290,37 +295,27 @@
     </div>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const colorButtons = document.querySelectorAll('.tp-color-variation-btn');
-
-        colorButtons.forEach(click => {
-            button.addEventListener('click', function() {
-                // Loại bỏ class active khỏi tất cả các nút
-                colorButtons.forEach(btn => btn.classList.remove('active'));
-
-                // Thêm class active vào nút được chọn
-                this.classList.add('active');
-
-                // (Tuỳ chọn) Lấy giá trị màu được chọn và xử lý
-                const selectedColor = this.getAttribute('data-color');
-            });
+    document.addEventListener('DOMContentLoaded', function () {
+    const colorButtons = document.querySelectorAll('.tp-color-variation-btn');
+    colorButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            // Loại bỏ class active khỏi tất cả các nút
+            colorButtons.forEach(btn => btn.classList.remove('active'));
+            // Thêm class active vào nút được chọn
+            this.classList.add('active'); 
         });
     });
+});
+
 
     document.addEventListener('DOMContentLoaded', function() {
         const sizeButtons = document.querySelectorAll('.tp-size-variation-btn');
-
         sizeButtons.forEach(button => {
             button.addEventListener('click', function() {
                 // Loại bỏ class active khỏi tất cả các nút
                 sizeButtons.forEach(btn => btn.classList.remove('active'));
-
                 // Thêm class active vào nút được chọn
                 this.classList.add('active');
-
-                // (Tuỳ chọn) Lấy giá trị kích thước được chọn
-                const selectedSize = this.getAttribute('data-size');
-                console.log('Selected size:', selectedSize);
             });
         });
     });
