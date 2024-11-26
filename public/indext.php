@@ -110,4 +110,8 @@ switch ($action) {
     case 'product_detail':
         $home->getProductDetail();
         break;
+        // ============CART=============
+    case 'cart':
+        include '../view/client/cart/list.php';
+        break;
 }
