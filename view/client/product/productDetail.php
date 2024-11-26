@@ -46,8 +46,9 @@
                     <p><?= $productDetail['cate_name'] ?></p>
                     <h1><?= $productDetail['pro_name'] ?></h1>
                     <div class="product-details-price">
-                        <span class="old"><?= number_format($productDetail['pro_price'] * 1000, 0, ',', '.') ?>đ </span>-
-                        <span><?= number_format($productDetail['pro_sale_price'] * 1000, 0, ',', '.') ?>đ </span>
+                        <span class="old price-variants me-3"><?= number_format($productDetail['pro_price'] * 1000, 0, ',', '.') ?>đ</span> 
+                        <span class="sale-price-variants"><?= number_format($productDetail['pro_sale_price'] * 1000, 0, ',', '.') ?>đ </span>
+                        <input type="hidden" name="variant_id" id="variant_id">
                     </div>
                     <div class="pro-details-rating-wrap">
                         <div class="pro-details-rating">
@@ -67,9 +68,7 @@
                             <h4 class="tp-product-details-variation-title">Color :</h4>
                             <div class="tp-product-details-variation-list">
                                 <?php foreach ($productDetail['variants'] as $variant) { ?>
-                                    <button type="button"
-                                        class="color tp-color-variation-btn"
-                                        data-color="<?= $variant['variant_color_code'] ?>">
+                                    <button type="button" class="color tp-color-variation-btn btn-color" data-color="<?= $variant['variant_color_code'] ?>">
                                         <span data-bg-color="<?= $variant['variant_color_code'] ?>"
                                             style="background-color: <?= $variant['variant_color_code'] ?>;"
                                             class="border"></span>
@@ -83,10 +82,10 @@
                         <!-- single item -->
                         <div class="tp-product-details-variation-item">
                             <h4 class="tp-product-details-variation-title">Sizze :</h4>
-                            <div class="tp-product-details-variation-list">
+                            <div class="tp-product-details-variation-list ">
                                 <?php foreach ($productDetail['variants'] as $variant) { ?>
                                     <button type="button"
-                                        class="size tp-size-variation-btn"
+                                        class="size tp-size-variation-btn btn-size"
                                         data-size="<?= $variant['variant_size'] ?>">
                                         <span><?= $variant['variant_size'] ?></span>
                                     </button>
@@ -95,10 +94,10 @@
 
                         </div>
                     </div>
-
+                    <p class="quantity-variants">Quantity :</p>
                     <div class="pro-details-quality">
                         <div class="cart-plus-minus">
-                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
+                            <input class="cart-plus-minus-box quantity-variants" type="text" name="qtybutton" value="2">
                         </div>
                         <div class="pro-details-cart btn-hover">
                             <a href="#">Thêm vào giỏ hàng</a>
@@ -294,18 +293,19 @@
         </div>
     </div>
 </div>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    const colorButtons = document.querySelectorAll('.tp-color-variation-btn');
-    colorButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            // Loại bỏ class active khỏi tất cả các nút
-            colorButtons.forEach(btn => btn.classList.remove('active'));
-            // Thêm class active vào nút được chọn
-            this.classList.add('active'); 
+    document.addEventListener('DOMContentLoaded', function() {
+        const colorButtons = document.querySelectorAll('.tp-color-variation-btn');
+        colorButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Loại bỏ class active khỏi tất cả các nút
+                colorButtons.forEach(btn => btn.classList.remove('active'));
+                // Thêm class active vào nút được chọn
+                this.classList.add('active');
+            });
         });
     });
-});
 
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -320,4 +320,87 @@
         });
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let selectedColor = null;
+        let selectedSize = null;
+
+        const variants = <?= json_encode($productDetail['variants']) ?>;
+        console.log(variants);
+
+        const colorButtons = document.querySelectorAll('.btn-color');
+        const sizeButtons = document.querySelectorAll('.btn-size');
+
+
+        //Sứ lý sự kiện khi chọn màu
+        colorButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                selectedColor = this.getAttribute('data-color');
+                console.log(selectedColor);                
+                updateSize(); //Cập nhập kích thước khả dụng
+                checkPrice(); //Kiểm tra giá tiền
+            })
+        })
+
+        sizeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                selectedSize = this.getAttribute('data-size');
+                console.log(selectedSize);                
+                updateColor(); //Cập nhập màu khả dụng
+                checkPrice(); //Kiểm tra giá tiền
+            })
+        })
+
+        function checkPrice() {
+            if (selectedColor && selectedSize) {
+                //hàm find trả vè phần tử đầu tiên trong mảng thỏa mãn điều kiện
+                const matchedVariant = variants.find(variant =>
+                    variant.variant_color_code === selectedColor && variant.variant_size === selectedSize
+                );
+
+                if (matchedVariant) {
+                    document.querySelector('.price-variants').textContent = formatPrice(matchedVariant.variant_price);
+                    document.querySelector('.sale-price-variants').textContent = formatPrice(matchedVariant.variant_sale_price);
+                    document.querySelector('.quantity-variants').textContent = matchedVariant.variant_quantity;
+                    document.getElementById('variant_id').value = matchedVariant.variant_id;
+                } else {
+                    document.querySelector('.price-variants').textContent = '';
+                    document.querySelector('.sale-price-variants').textContent = 'Hết hàng';
+                    document.querySelector('.quantity-variants').textContent = 0;
+                    document.getElementById('variant_id').value = '';
+                }
+            }
+        }
+
+        //Cập nhập màu khả dụng
+        function updateColor() {
+            colorButtons.forEach(button => {
+                const color = button.getAttribute('data-color');
+                //kiểm tra kích thước size có màu này không
+                const isAvailable = variants.some(variant =>
+                    variant.variant_color_code === color && variant.variant_size === selectedSize);
+                    
+            })
+        }
+
+        function updateSize() {
+            sizeButtons.forEach(button => {
+                const size = button.getAttribute('data-size')
+                //kiểm tra kích thước size có màu này không
+                const isAvailable = variants.some(variant =>
+                    variant.variant_color_code === selectedColor && variant.variant_size === size);
+                button.disabaled = !isAvailable; //Nếu không tồn tại thì không chọn đc
+                if (!isAvailable) {
+                    button.classList.remove('selected');
+                }
+            });
+            selectedSize = null;
+        }
+
+        function formatPrice(price){
+            return new Intl.NumberFormat('vi-VN').format(price * 1000)+'đ';
+        }
+    });
+</script>
+
 <?php include '../view/client/layout/footer.php' ?>
