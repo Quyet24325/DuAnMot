@@ -15,11 +15,11 @@
                                     <thead>
                                         <tr>
                                             <th>Ảnh sản phẩm</th>
-                                            <th>Mã đơn hàng</th>
                                             <th>Ngày đặt</th>
-                                            <th>Payment Method</th>
-                                            <th>Delivery Status</th>
-                                            <th>Amount</th>
+                                            <th>Mã đơn hàng</th>
+                                            <th>Số lượng</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Trạng thái đơn</th>
                                             <th>Option</th>
                                         </tr>
                                     </thead>
@@ -35,17 +35,17 @@
                                                 </a>
                                             </td>
 
-                                            <td> 406-4883635</td>
-
                                             <td>Jul 20, 2022</td>
+
+                                            <td> 406-4883635</td>
 
                                             <td>Paypal</td>
 
+                                            <td>$15</td>
+
                                             <td class="order-success">
                                                 <span>Success</span>
-                                            </td>
-
-                                            <td>$15</td>
+                                            </td>   
 
                                             <td>
                                                 <ul>

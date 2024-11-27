@@ -9,6 +9,8 @@ require_once '../controllers/admin/CouponAdminController.php';
 require_once '../controllers/admin/OrderAdminController.php';
 //==========clinet=========
 require_once '../controllers/client/homeController.php';
+require_once '../controllers/client/authControllerAdmin.php';
+require_once '../controllers/client/profileController.php';
 
 
 //==========Admin=========
@@ -20,6 +22,10 @@ $orderAdmin = new OrderAdminController();
 
 //==========clinet=========
 $home = new homeController();
+$auth = new authControllerAdmin();
+$profile = new profileController;
+
+
 $action = isset($_GET['act']) ? $_GET['act'] : 'indext';
 switch ($action) {
         // ============ADMIN=============
@@ -102,10 +108,16 @@ switch ($action) {
         $home->index();
         break;
     case 'login':
-        include '../view/client/auth/login.php';
+        $auth->signIn();
         break;
-    case 'regester':
-        include '../view/client/auth/regester.php';
+    case 'register':
+        $auth->createUser();
+        break;
+    case 'profile':
+        include '../view/client/profile/profile.php';
+        break;
+    case 'updateProfile':
+        $profile->updateProfile();
         break;
     case 'product_detail':
         $home->getProductDetail();

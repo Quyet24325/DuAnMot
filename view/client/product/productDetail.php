@@ -46,7 +46,7 @@
                     <p><?= $productDetail['cate_name'] ?></p>
                     <h1><?= $productDetail['pro_name'] ?></h1>
                     <div class="product-details-price">
-                        <span class="old price-variants me-3"><?= number_format($productDetail['pro_price'] * 1000, 0, ',', '.') ?>đ</span> 
+                        <span class="old price-variants me-3"><?= number_format($productDetail['pro_price'] * 1000, 0, ',', '.') ?>đ</span>
                         <span class="sale-price-variants"><?= number_format($productDetail['pro_sale_price'] * 1000, 0, ',', '.') ?>đ </span>
                         <input type="hidden" name="variant_id" id="variant_id">
                     </div>
@@ -336,7 +336,7 @@
         colorButtons.forEach(button => {
             button.addEventListener('click', function() {
                 selectedColor = this.getAttribute('data-color');
-                console.log(selectedColor);                
+                console.log(selectedColor);
                 updateSize(); //Cập nhập kích thước khả dụng
                 checkPrice(); //Kiểm tra giá tiền
             })
@@ -345,7 +345,7 @@
         sizeButtons.forEach(button => {
             button.addEventListener('click', function() {
                 selectedSize = this.getAttribute('data-size');
-                console.log(selectedSize);                
+                console.log(selectedSize);
                 updateColor(); //Cập nhập màu khả dụng
                 checkPrice(); //Kiểm tra giá tiền
             })
@@ -365,7 +365,7 @@
                     document.getElementById('variant_id').value = matchedVariant.variant_id;
                 } else {
                     document.querySelector('.price-variants').textContent = '';
-                    document.querySelector('.sale-price-variants').textContent = 'Hết hàng';
+                    document.querySelector('.sale-price-variants').textContent = '';
                     document.querySelector('.quantity-variants').textContent = 0;
                     document.getElementById('variant_id').value = '';
                 }
@@ -379,7 +379,7 @@
                 //kiểm tra kích thước size có màu này không
                 const isAvailable = variants.some(variant =>
                     variant.variant_color_code === color && variant.variant_size === selectedSize);
-                    
+
             })
         }
 
@@ -389,7 +389,7 @@
                 //kiểm tra kích thước size có màu này không
                 const isAvailable = variants.some(variant =>
                     variant.variant_color_code === selectedColor && variant.variant_size === size);
-                button.disabaled = !isAvailable; //Nếu không tồn tại thì không chọn đc
+                button.disabled = !isAvailable; //Nếu không tồn tại thì không chọn đc
                 if (!isAvailable) {
                     button.classList.remove('selected');
                 }
@@ -397,8 +397,8 @@
             selectedSize = null;
         }
 
-        function formatPrice(price){
-            return new Intl.NumberFormat('vi-VN').format(price * 1000)+'đ';
+        function formatPrice(price) {
+            return new Intl.NumberFormat('vi-VN').format(price * 1000) + 'đ';
         }
     });
 </script>

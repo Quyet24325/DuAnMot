@@ -1,59 +1,45 @@
 <?php include '../view/client/layout/header.php' ?>
 
 
-<div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
-    <div class="container">
-        <div class="breadcrumb-content text-center">
-            <ul>
-                <li>
-                    <a href="index.html">Home</a>
-                </li>
-                <li class="active">login/Register </li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="login-register-area pt-100 pb-100">
+<div class="login-register-area pb-50">
     <div class="container">
         <div class="row">
             <div class="col-lg-7 col-md-12 ms-auto me-auto">
                 <div class="login-register-wrapper">
-                    <div class="login-register-tab-list nav">
-                        <a class="active" data-bs-toggle="tab" href="#lg1">
-                            <h4> login </h4>
-                        </a>
-                        <a data-bs-toggle="tab" href="#lg2">
-                            <h4> register </h4>
-                        </a>
+                    <div class="login-register-tab-list nav">  
+                            <h4> Đăng nhập </h4>
+                    </div>
+                    <div class="login-register-tab-list nav">  
+                            <p>Bạn đã có tài khoản chưa?</p><a href="indext.php?act=register" style="color: #3399FF;">Sign Up</a>
                     </div>
                     <div class="tab-content">
                         <div id="lg1" class="tab-pane active">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    <form action="#" method="post">
-                                        <input type="text" name="user-name" placeholder="Username">
-                                        <input type="password" name="user-password" placeholder="Password">
+                                    <form action="indext.php?act=login" method="post">
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email của bạn">
+                                            <?php if (isset($_SESSION['errors']['email'])) { ?>
+                                                <p class="text-danger"><?= $_SESSION['errors']['email'] ?></p>
+                                            <?php } ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pass">Password</label>
+                                            <input type="password" class="form-control" id="pass" name="pass" placeholder="Nhập mật khẩu của bạn">
+                                            <?php if (isset($_SESSION['errors']['pass'])) { ?>
+                                                <p class="text-danger"><?= $_SESSION['errors']['pass'] ?></p>
+                                            <?php } ?>
+                                        </div>
+
+
                                         <div class="button-box">
                                             <div class="login-toggle-btn">
                                                 <input type="checkbox">
                                                 <label>Remember me</label>
-                                                <a href="#">Forgot Password?</a>
+                                                <a href="indext.php?act=register">Sign up</a>
                                             </div>
-                                            <button type="submit"><span>Login</span></button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="lg2" class="tab-pane">
-                            <div class="login-form-container">
-                                <div class="login-register-form">
-                                    <form action="#" method="post">
-                                        <input type="text" name="user-name" placeholder="Username">
-                                        <input type="password" name="user-password" placeholder="Password">
-                                        <input name="user-email" placeholder="Email" type="email">
-                                        <div class="button-box">
-                                            <button type="submit"><span>Register</span></button>
+                                            <button type="submit" name="login"><span>Sign in</span></button>
                                         </div>
                                     </form>
                                 </div>
@@ -66,4 +52,6 @@
     </div>
 </div>
 
-<?php include '../view/client/layout/footer.php' ?>
+<?php 
+unset($_SESSION['errors']);
+include '../view/client/layout/footer.php' ?>

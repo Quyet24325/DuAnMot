@@ -20,7 +20,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 
-    
+
     <!-- Google font-->
     <link
         href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
@@ -75,7 +75,7 @@
     <?php
     if (isset($_SESSION['error'])) {
         echo "<script type='text/javascript'>
-        toastr.waring('{$_SESSION['error']}');
+        toastr.warning('{$_SESSION['error']}');
         </script>";
 
         unset($_SESSION['error']);
@@ -84,7 +84,6 @@
         echo "<script type='text/javascript'>
         toastr.success('{$_SESSION['success']}');
         </script>";
-
         unset($_SESSION['success']);
     }
     ?>
@@ -107,7 +106,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <div class="nav-right col-6 pull-right right-header p-0">
                     <ul class="nav-menus">
                         <li>
@@ -277,7 +276,7 @@
                                         <li>
                                             <a href="indext.php?act=category_create">Create</a>
                                         </li>
-                                        
+
                                     </ul>
                                 </li>
 
