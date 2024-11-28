@@ -97,11 +97,10 @@
                         <a href="wishlist.html"><i class="pe-7s-like"></i></a>
                     </div>
                     <div class="same-style cart-wrap">
-                        <button class="icon-cart">
+                        <a href="?act=cart"><button class="icon-cart">
                             <i class="pe-7s-shopbag"></i>
-                            <span class="count-style">02</span>
-                        </button>
-                        <div class="shopping-cart-content">
+                        </button></a>
+                        <!-- <div class="shopping-cart-content">
                             <ul>
                                 <li class="single-shopping-cart">
                                     <div class="shopping-cart-img">
@@ -138,7 +137,7 @@
                                 <a class="default-btn" href="cart-page.html">xem giỏ hàng</a>
                                 <a class="default-btn" href="checkout.html">kiểm tra</a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

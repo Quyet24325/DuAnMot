@@ -41,84 +41,91 @@
                 </div>
 
             </div>
+
             <div class="col-lg-6 col-md-6">
-                <div class="product-details-content ml-70">
-                    <p><?= $productDetail['cate_name'] ?></p>
-                    <h1><?= $productDetail['pro_name'] ?></h1>
-                    <div class="product-details-price">
-                        <span class="old price-variants me-3"><?= number_format($productDetail['pro_price'] * 1000, 0, ',', '.') ?>đ</span> 
-                        <span class="sale-price-variants"><?= number_format($productDetail['pro_sale_price'] * 1000, 0, ',', '.') ?>đ </span>
-                        <input type="hidden" name="variant_id" id="variant_id">
-                    </div>
-                    <div class="pro-details-rating-wrap">
-                        <div class="pro-details-rating">
-                            <i class="fa fa-star-o yellow"></i>
-                            <i class="fa fa-star-o yellow"></i>
-                            <i class="fa fa-star-o yellow"></i>
-                            <i class="fa fa-star-o yellow"></i>
-                            <i class="fa fa-star-o"></i>
+                <form action="?act=addToCart-byNow" method="post">
+                    <div class="product-details-content ml-70">
+                        <input type="text" name="product_id" value="<?= $productDetail['pro_id'] ?>">
+                        <p><?= $productDetail['cate_name'] ?></p>
+                        <h1><?= $productDetail['pro_name'] ?></h1>
+                        <div class="product-details-price">
+                            <span class="old price-variants me-3"><?= number_format($productDetail['pro_price'] * 1000, 0, ',', '.') ?>đ</span>
+                            <span class="sale-price-variants"><?= number_format($productDetail['pro_sale_price'] * 1000, 0, ',', '.') ?>đ </span>
+                            <input type="hidden" name="variant_id" id="variant_id">
                         </div>
-                        <span><a href="#">0 Reviews</a></span>
-                    </div>
-                    <p class="mb-3"><?= $productDetail['pro_description'] ?></p>
-
-                    <div class="tp-product-details-variation">
-                        <!-- single item -->
-                        <div class="tp-product-details-variation-item">
-                            <h4 class="tp-product-details-variation-title">Color :</h4>
-                            <div class="tp-product-details-variation-list">
-                                <?php foreach ($productDetail['variants'] as $variant) { ?>
-                                    <button type="button" class="color tp-color-variation-btn btn-color" data-color="<?= $variant['variant_color_code'] ?>">
-                                        <span data-bg-color="<?= $variant['variant_color_code'] ?>"
-                                            style="background-color: <?= $variant['variant_color_code'] ?>;"
-                                            class="border"></span>
-                                    </button>
-                                <?php } ?>
+                        <div class="pro-details-rating-wrap">
+                            <div class="pro-details-rating">
+                                <i class="fa fa-star-o yellow"></i>
+                                <i class="fa fa-star-o yellow"></i>
+                                <i class="fa fa-star-o yellow"></i>
+                                <i class="fa fa-star-o yellow"></i>
+                                <i class="fa fa-star-o"></i>
                             </div>
+                            <span><a href="#">0 Reviews</a></span>
                         </div>
+                        <p class="mb-3"><?= $productDetail['pro_description'] ?></p>
 
-                    </div>
-                    <div class="tp-product-details-variation">
-                        <!-- single item -->
-                        <div class="tp-product-details-variation-item">
-                            <h4 class="tp-product-details-variation-title">Sizze :</h4>
-                            <div class="tp-product-details-variation-list ">
-                                <?php foreach ($productDetail['variants'] as $variant) { ?>
-                                    <button type="button"
-                                        class="size tp-size-variation-btn btn-size"
-                                        data-size="<?= $variant['variant_size'] ?>">
-                                        <span><?= $variant['variant_size'] ?></span>
-                                    </button>
-                                <?php } ?>
+                        <div class="tp-product-details-variation">
+                            <!-- single item -->
+                            <div class="tp-product-details-variation-item">
+                                <h4 class="tp-product-details-variation-title">Color :</h4>
+                                <div class="tp-product-details-variation-list">
+                                    <?php foreach ($productDetail['variants'] as $variant) { ?>
+                                        <button type="button" class="color tp-color-variation-btn btn-color" data-color="<?= $variant['variant_color_code'] ?>">
+                                            <span data-bg-color="<?= $variant['variant_color_code'] ?>"
+                                                style="background-color: <?= $variant['variant_color_code'] ?>;"
+                                                class="border"></span>
+                                        </button>
+                                    <?php } ?>
+                                </div>
                             </div>
 
                         </div>
+                        <div class="tp-product-details-variation">
+                            <!-- single item -->
+                            <div class="tp-product-details-variation-item">
+                                <h4 class="tp-product-details-variation-title">Sizze :</h4>
+                                <div class="tp-product-details-variation-list ">
+                                    <?php foreach ($productDetail['variants'] as $variant) { ?>
+                                        <button type="button"
+                                            class="size tp-size-variation-btn btn-size"
+                                            data-size="<?= $variant['variant_size'] ?>">
+                                            <span><?= $variant['variant_size'] ?></span>
+                                        </button>
+                                    <?php } ?>
+                                </div>
+
+                            </div>
+                        </div>
+                        <p class="quantity-variants">Quantity :</p>
+                        <div class="pro-details-quality">
+                            <div class="cart-plus-minus">
+                                <input class="cart-plus-minus-box quantity-variants" type="text" name="quantity" value="1">
+                            </div>
+                            <div class="pro-details-cart btn-hover">
+                                <button name="add_to_cart" class="tp-product-details-add-to-cart-btn w-100">Thêm vào giỏ hàng</button>
+                            </div>
+                            <div class="pro-details-cart btn-hover">
+                                <button name="buy-now" class="tp-product-details-add-to-cart-btn w-100">mua ngay</button>
+                            </div>
+                            <div class="pro-details-wishlist">
+                                <a href="#"><i class="fa fa-heart-o"></i></a>
+                            </div>
+                            <div class="pro-details-compare">
+                                <a href="#"><i class="pe-7s-shuffle"></i></a>
+                            </div>
+                        </div>
+                        <div class="pro-details-social">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <p class="quantity-variants">Quantity :</p>
-                    <div class="pro-details-quality">
-                        <div class="cart-plus-minus">
-                            <input class="cart-plus-minus-box quantity-variants" type="text" name="qtybutton" value="2">
-                        </div>
-                        <div class="pro-details-cart btn-hover">
-                            <a href="#">Thêm vào giỏ hàng</a>
-                        </div>
-                        <div class="pro-details-wishlist">
-                            <a href="#"><i class="fa fa-heart-o"></i></a>
-                        </div>
-                        <div class="pro-details-compare">
-                            <a href="#"><i class="pe-7s-shuffle"></i></a>
-                        </div>
-                    </div>
-                    <div class="pro-details-social">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -336,7 +343,7 @@
         colorButtons.forEach(button => {
             button.addEventListener('click', function() {
                 selectedColor = this.getAttribute('data-color');
-                console.log(selectedColor);                
+                console.log(selectedColor);
                 updateSize(); //Cập nhập kích thước khả dụng
                 checkPrice(); //Kiểm tra giá tiền
             })
@@ -345,7 +352,7 @@
         sizeButtons.forEach(button => {
             button.addEventListener('click', function() {
                 selectedSize = this.getAttribute('data-size');
-                console.log(selectedSize);                
+                console.log(selectedSize);
                 updateColor(); //Cập nhập màu khả dụng
                 checkPrice(); //Kiểm tra giá tiền
             })
@@ -379,7 +386,7 @@
                 //kiểm tra kích thước size có màu này không
                 const isAvailable = variants.some(variant =>
                     variant.variant_color_code === color && variant.variant_size === selectedSize);
-                    
+
             })
         }
 
@@ -397,8 +404,8 @@
             selectedSize = null;
         }
 
-        function formatPrice(price){
-            return new Intl.NumberFormat('vi-VN').format(price * 1000)+'đ';
+        function formatPrice(price) {
+            return new Intl.NumberFormat('vi-VN').format(price * 1000) + 'đ';
         }
     });
 </script>

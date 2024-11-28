@@ -9,6 +9,7 @@ require_once '../controllers/admin/CouponAdminController.php';
 require_once '../controllers/admin/OrderAdminController.php';
 //==========clinet=========
 require_once '../controllers/client/homeController.php';
+require_once '../controllers/client/cartController.php';
 
 
 //==========Admin=========
@@ -20,6 +21,7 @@ $orderAdmin = new OrderAdminController();
 
 //==========clinet=========
 $home = new homeController();
+$cart = new cartController();
 $action = isset($_GET['act']) ? $_GET['act'] : 'indext';
 switch ($action) {
         // ============ADMIN=============
@@ -112,6 +114,9 @@ switch ($action) {
         break;
         // ============CART=============
     case 'cart':
-        include '../view/client/cart/list.php';
+        include '../view/client/cart/cart.php';
+        break;
+    case 'addToCart-byNow':
+        $cart->addToCartOrByNow();
         break;
 }
