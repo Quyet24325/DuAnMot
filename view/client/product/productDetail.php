@@ -99,15 +99,12 @@
                         </div>
                         <p class="quantity-variants">Quantity :</p>
                         <div class="pro-details-quality">
-                            
+
                             <div class="cart-plus-minus">
                                 <input class="cart-plus-minus-box quantity-variants" type="text" name="quantity" value="1">
                             </div>
                             <div class="pro-details-cart btn-hover">
                                 <button name="add_to_cart" class="tp-product-details-add-to-cart-btn w-100">Thêm vào giỏ hàng</button>
-                            </div>
-                            <div class="pro-details-cart btn-hover">
-                                <button name="buy-now" class="tp-product-details-add-to-cart-btn w-100">mua ngay</button>
                             </div>
                             <div class="pro-details-wishlist">
                                 <a href="#"><i class="fa fa-heart-o"></i></a>
@@ -115,6 +112,9 @@
                             <div class="pro-details-compare">
                                 <a href="#"><i class="pe-7s-shuffle"></i></a>
                             </div>
+                        </div>
+                        <div class="pro-details-cart btn-hover">
+                            <a href="indext.php?act=checkout" class="tp-product-details-add-to-cart-btn w-100">mua ngay</a>
                         </div>
                         <div class="pro-details-social">
                             <ul>

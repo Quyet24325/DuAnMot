@@ -1,6 +1,6 @@
 <?php include '../view/client/layout/header.php' ?>
 
-<div class="cart-main-area pt-90 pb-100">
+<div class="cart-main-area">
     <div class="container">
         <h3 class="cart-page-title">Sản phẩm trong giỏ hàng</h3>
         <div class="row">
@@ -26,7 +26,7 @@
                                             <a href="#"><img src="./images/product/<?= $car['pro_image'] ?>" width="90" height="100"></a>
                                         </td>
                                         <td class="product-name"><a href="#"><?= $car['pro_name'] ?></a></td>
-                                        <td class="product-price-cart"><span class="amount"><?= number_format($car['pro_var_price'] * 1000) ?>đ</span></td>
+                                        <td class="product-price-cart"><span class="amount"><?= number_format($car['pro_var_sale_price'] * 1000) ?>đ</span></td>
                                         <td><?= $car['var_color_name'] ?></td>
                                         <td><?= $car['var_size_name'] ?></td>
                                         <td class="product-quantity">
@@ -62,66 +62,22 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="cart-tax">
                                 <div class="title-wrap">
-                                    <h4 class="cart-bottom-title section-bg-gray">Ước tính chi phí vận chuyển và thuế</h4>
-                                </div>
-                                <div class="tax-wrapper">
-                                    <p>Nhập điểm đến của bạn để nhận được ước tính chi phí vận chuyển.</p>
-                                    <div class="tax-select-wrapper">
-                                        <div class="tax-select">
-                                            <label>
-                                                *Thành phố
-                                            </label>
-                                            <select class="email s-email s-wid">
-                                                <option>Hà Nội</option>
-                                                <option>HCM</option>
-                                                <option>Thanh Hóa</option>
-                                                <option>Hải Dương</option>
-                                                <option>Thái Bình</option>
-                                            </select>
-                                        </div>
-                                        <div class="tax-select">
-                                            <label>
-                                                * Region / State
-                                            </label>
-                                            <select class="email s-email s-wid">
-                                                <option>Bangladesh</option>
-                                                <option>Albania</option>
-                                                <option>Åland Islands</option>
-                                                <option>Afghanistan</option>
-                                                <option>Belgium</option>
-                                            </select>
-                                        </div>
-                                        <div class="tax-select">
-                                            <label>
-                                                * Zip/Postal Code
-                                            </label>
-                                            <input type="text">
-                                        </div>
-                                        <button class="cart-btn-2" type="submit">Chấp nhận</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="cart-tax">
-                                <div class="title-wrap">
                                     <h4 class="cart-bottom-title section-bg-gray">Sử dụng mã giảm giá</h4>
                                 </div>
                                 <div class="tax-wrapper">
                                     <p>Nhập mã phiếu giảm giá nếu bạn có.</p>
-                                        <input type="text" name="coupon_code" placeholder="Nhập mã phiếu giảm giá">
-                                        <button class="btn btn-outline-primary cart-btn-2" type="submit" name="apply_coupon">Áp dụng phiếu giảm giá</button>
+                                    <input type="text" name="coupon_code" placeholder="Nhập mã phiếu giảm giá">
+                                    <button class="btn btn-outline-primary cart-btn-2 mt-2" type="submit" name="apply_coupon">Áp dụng phiếu giảm giá</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-12">
+                        <div class="col-lg-4 col-md-12 mb-3">
                             <div class="grand-totall">
                                 <div class="title-wrap">
-                                    <h4 class="cart-bottom-title section-bg-gary-cart">Tổng số giỏ hàng</h4>
+                                    <h4 class="cart-bottom-title section-bg-gary-cart">Hóa đơn</h4>
                                 </div>
-                                <h5>Tổng số sản phẩm <span><?= number_format($sum * 1000) ?>đ</span></h5>
-                                <div class="total-shipping">
-                                <h5>mã giảm giá <span><?= number_format($_SESSION['totalCoupon'] * 1000) ?>đ</span></h5>
+                                <h5>Giá sản phẩm <span><?= number_format($sum * 1000) ?>đ</span></h5>
+                                <h5>mã giảm giá <span>-<?= number_format(($_SESSION['totalCoupon'] ?? 0) * 1000) ?>đ</span></h5>
                                 <div class="total-shipping">
                                     <h5>Tổng chi phí vận chuyển</h5>
                                     <ul>
@@ -129,11 +85,10 @@
                                         <li><input type="checkbox"> Express <span>$30.00</span></li>
                                     </ul>
                                 </div>
-                                <h4 class="grand-totall-title">Tổng cộng <span><?= number_format(($sum-$_SESSION['totalCoupon'] )* 1000) ?>đ</span></h4>
-                                <a href="#">Proceed to Checkout</a>
+                                <h4 class="grand-totall-title">Tổng cộng <span><?= number_format(($sum - ($_SESSION['totalCoupon'] ?? 0)) * 1000) ?>đ</span></h4>
+                                <a href="indext.php?act=checkout">Mua hàng</a>
                             </div>
                         </div>
-                    </div>
                 </form>
             </div>
         </div>

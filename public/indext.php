@@ -147,6 +147,9 @@ switch ($action) {
 
         // ============CHECKOUT=============
     case 'checkout':
-       $order->checkout();
+        $order->indext();
+        break;
+    case 'place_order':
+        $order->checkout();
         break;
 }
