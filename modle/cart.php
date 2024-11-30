@@ -5,23 +5,23 @@ require_once '../connect/connect.php';
 class cart extends connect{
     public function getAllCart(){
         $sql = 'select
-                cart.id as cart_id,
+                cart.cart_id as cart_id,
                 products.name as pro_name,
                 products.image as pro_image,
+                products.slug as pro_slug,
                 product_variants.price as pro_var_price,
                 product_variants.sale_price as pro_var_sale_price,
-                variant_color.color_name as var_color_name,
-                variant_size.size as var_size_name,
+                variant_color.name as var_color_name,
+                variant_size.name as var_size_name,
                 cart.quantity as quantity
 
                 from cart
-                left join products on cart.product_id = products.product_id
-                left join product_variants on product_variants.product_id = products.product_id
-                left join variant_colors on product_variants.variant_color_id = variant_color.variant_color_id
-                left join variant_sizes on product_variants.variant_size_id = variant_size.variant_size_id
+                left join products on cart.pro_id = products.pro_id
+                left join product_variants on product_variants.var_id = cart.variant_id
+                left join variant_color on product_variants.var_color_id = variant_color.var_color_id
+                left join variant_size on product_variants.var_size_id = variant_size.var_size_id
 
-                where cart.user_id
-
+                where cart.user_id = ?
                 ';
 
         $stmt = $this->connect()->prepare($sql);
@@ -29,22 +29,41 @@ class cart extends connect{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    public function addToCart($user_id ,$pro_id ,$var_id ,$quantity){
-        $sql = 'insert into cart(user_id,pro_id,var_id,quantity) value(?,?,?,?)';
+    public function addToCart($user_id ,$pro_id ,$variant_id ,$quantity){
+        $sql = 'insert into cart(user_id,pro_id,variant_id,quantity) value(?,?,?,?)';
         $stmt = $this->connect()->prepare($sql);
-        return $stmt ->execute([$user_id ,$pro_id ,$var_id ,$quantity]);
+        return $stmt ->execute([$user_id ,$pro_id ,$variant_id ,$quantity]);
     }
 
     public function checkCart(){
-        $sql = 'select * from cart where user_id = ? and product_id = ? and variant = ?';
+        $sql = 'select * from cart where user_id = ? and pro_id = ? and variant_id = ?';
         $stmt = $this->connect()->prepare($sql);
-        $stmt->execute([$_SESSION['user']['user_id'], $_POST['variant_id']]);
+        $stmt->execute([$_SESSION['user']['user_id'],$_POST['pro_id'], $_POST['variant_id']]);
         return $stmt->fetch();
     }
     
-    public function updateCart($user_id ,$pro_id ,$var_id ,$quantity){
-        $sql = 'update cart set quantity = ? where user_id = ? and variant_id = ?';
+    public function updateCart($user_id ,$pro_id ,$variant_id ,$quantity){
+        $sql = 'update cart set quantity = ? where user_id = ? and pro_id = ? and variant_id = ?';
         $stmt = $this->connect()->prepare($sql);
-        return $stmt->execute([$quantity,$user_id ,$pro_id ,$var_id ]);
+        return $stmt->execute([$quantity,$user_id ,$pro_id ,$variant_id ]);
+    }
+
+    public function updateCartById($cart_id, $quantity){
+        $sql = 'update cart set quantity = ? where cart_id = ?';
+        $stmt = $this->connect()->prepare($sql);
+        return $stmt->execute([$quantity,$cart_id]);
+    }
+
+    public function deleteCart($cart_id){
+        $sql = 'delete from cart where cart_id = ?';
+        $stmt = $this->connect()->prepare($sql);
+        return $stmt->execute([$cart_id]);
+    }
+
+    public function getCouponByCode($coupon_code){
+        $sql = 'select * from coupons where coupon_code = ?';
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$coupon_code]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

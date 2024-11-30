@@ -3,6 +3,35 @@ require_once '../connect/connect.php';
 
 class user extends connect
 {
+    public function register($name,$email,$pass){
+        $hash_password = password_hash($pass,PASSWORD_DEFAULT);
+        $sql="insert into user (name,email,pass,role_id) value (?,?,?,2)";
+        $stmt=$this->connect()->prepare($sql);
+        return $stmt->execute([$name,$email,$hash_password]);
+    }
+
+    public function login($email,$pass){
+        $sql="select * from user where email = ?";
+        $stmt=$this->connect()->prepare($sql);
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
+        if ($user && password_verify($pass,$user['pass'])) {
+            return $user;
+        }
+        return false;
+    }
+    
+    public function update($name,$email,$phone,$address,$gender){
+        $sql="update user set name=?,email=?,phone=?,address=?,gender=? where user_id=?";
+        $stmt=$this->connect()->prepare($sql);
+        return $stmt->execute([$name,$email,$phone,$address,$gender,$_SESSION['user']['user_id']]);
+    }
+    public function getUsserId($user_id){
+        $sql='select * from user where user_id = ?';
+        $stmt=$this->connect()->prepare($sql);
+        $stmt->execute([$user_id]);
+        return $stmt->fetch();
+    }
     public function listUsser()
     {
         $sql = "select 

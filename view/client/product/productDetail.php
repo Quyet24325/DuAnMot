@@ -9,7 +9,7 @@
         <div class="breadcrumb-content text-center">
             <h1>Chi tiết sản phẩm</h1>
             <span><?= $productDetail['pro_name'] ?></span>
-            <span><?= $productDetail['cate_name'] ?></span>
+            <!-- <span><?= $productDetail['cate_name'] ?></span> -->
         </div>
     </div>
 </div>
@@ -45,7 +45,7 @@
             <div class="col-lg-6 col-md-6">
                 <form action="?act=addToCart-byNow" method="post">
                     <div class="product-details-content ml-70">
-                        <input type="text" name="product_id" value="<?= $productDetail['pro_id'] ?>">
+                        <input type="hidden" name="pro_id" value="<?= $productDetail['pro_id'] ?>">
                         <p><?= $productDetail['cate_name'] ?></p>
                         <h1><?= $productDetail['pro_name'] ?></h1>
                         <div class="product-details-price">
@@ -99,6 +99,7 @@
                         </div>
                         <p class="quantity-variants">Quantity :</p>
                         <div class="pro-details-quality">
+                            
                             <div class="cart-plus-minus">
                                 <input class="cart-plus-minus-box quantity-variants" type="text" name="quantity" value="1">
                             </div>
@@ -372,7 +373,7 @@
                     document.getElementById('variant_id').value = matchedVariant.variant_id;
                 } else {
                     document.querySelector('.price-variants').textContent = '';
-                    document.querySelector('.sale-price-variants').textContent = 'Hết hàng';
+                    document.querySelector('.sale-price-variants').textContent = '';
                     document.querySelector('.quantity-variants').textContent = 0;
                     document.getElementById('variant_id').value = '';
                 }
@@ -396,7 +397,7 @@
                 //kiểm tra kích thước size có màu này không
                 const isAvailable = variants.some(variant =>
                     variant.variant_color_code === selectedColor && variant.variant_size === size);
-                button.disabaled = !isAvailable; //Nếu không tồn tại thì không chọn đc
+                button.disabled = !isAvailable; //Nếu không tồn tại thì không chọn đc
                 if (!isAvailable) {
                     button.classList.remove('selected');
                 }
