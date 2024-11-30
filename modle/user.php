@@ -26,12 +26,22 @@ class user extends connect
         $stmt=$this->connect()->prepare($sql);
         return $stmt->execute([$name,$email,$phone,$address,$gender,$_SESSION['user']['user_id']]);
     }
-    public function getUsserId($user_id){
+    public function detailUserId($user_id){
         $sql='select * from user where user_id = ?';
         $stmt=$this->connect()->prepare($sql);
         $stmt->execute([$user_id]);
-        return $stmt->fetch();
+        return  $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function addPass($pass){
+        $newPass = password_hash($pass,PASSWORD_DEFAULT);
+        $sql = "update user set pass = ? where user_id=?";
+        $stmt = $this->connect()->prepare($sql);
+        return $stmt->execute([$newPass,$_SESSION['user']['user_id']]);
+
+    }
+
+    
     public function listUsser()
     {
         $sql = "select 

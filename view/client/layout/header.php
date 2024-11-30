@@ -32,7 +32,7 @@
 </head>
 
 <body>
-<?php
+    <?php
     if (isset($_SESSION['error'])) {
         echo "<script type='text/javascript'>
         toastr.warning('{$_SESSION['error']}');
@@ -47,7 +47,7 @@
         unset($_SESSION['success']);
     }
     ?>
-    
+
     <header class="header-area header-padding-1 sticky-bar header-res-padding clearfix">
         <div class="container-fluid">
             <div class="row">
@@ -106,24 +106,36 @@
                             </div>
                         </div>
                         <div class="same-style account-satting">
-                            
+
                             <?php if (!isset($_SESSION['user'])) { ?>
                                 <a class="account-satting-active" href="#"><i class="pe-7s-user-female"></i></a>
                                 <div class="account-dropdown">
-                                <ul>
-                                    <li><a href="indext.php?act=login">Đăng nhập</a></li>
-                                    <li><a href="indext.php?act=register">Đăng ký</a></li>                                    
-                                </ul>
-                            </div>
+                                    <ul>
+                                        <li><a href="indext.php?act=login">Đăng nhập</a></li>
+                                        <li><a href="indext.php?act=register">Đăng ký</a></li>
+                                    </ul>
+                                </div>
                             <?php } else { ?>
-                                <a class="account-satting-active" href="#"><i class="pe-7s-user-female"></i></a>
-                                <div class="account-dropdown">
-                                <ul>
-                                    <li>Hello,<?=$_SESSION['user']['name'] ?></li>
-                                    <li><a href="indext.php?act=profile">Tài khoản</a></li>
-                                    <li><a href="indext.php?act=profile">Đăng xuất</a></li>
-                                </ul>
-                            </div>
+                                <?php if ($_SESSION['user']['role_id'] == 1) { ?>
+                                    <a class="account-satting-active" href="#"><i class="pe-7s-user-female"></i></a>
+                                    <div class="account-dropdown">
+                                        <ul>
+                                            <li>Hello,<?= $_SESSION['user']['name'] ?></li>
+                                            <li><a href="indext.php?act=admin">Trang quản lý</a></li>
+                                            <li><a href="indext.php?act=profile">Tài khoản</a></li>
+                                            <li><a href="indext.php?act=lognout">Đăng xuất</a></li>
+                                        </ul>
+                                    </div>
+                                <?php } else { ?>
+                                    <a class="account-satting-active" href="#"><i class="pe-7s-user-female"></i></a>
+                                    <div class="account-dropdown">
+                                        <ul>
+                                            <li>Hello,<?= $_SESSION['user']['name'] ?></li>  
+                                            <li><a href="indext.php?act=profile">Tài khoản</a></li>
+                                            <li><a href="indext.php?act=lognout">Đăng xuất</a></li>
+                                        </ul>
+                                    </div>
+                                <?php } ?>
                             <?php } ?>
                         </div>
                         <div class="same-style header-wishlist">

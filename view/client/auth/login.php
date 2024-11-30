@@ -32,7 +32,6 @@
                                             <?php } ?>
                                         </div>
 
-
                                         <div class="button-box">
                                             <div class="login-toggle-btn">
                                                 <input type="checkbox">

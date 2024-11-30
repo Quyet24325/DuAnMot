@@ -62,6 +62,12 @@ class authControllerAdmin extends user{
         }
         include '../view/client/auth/login.php';
     }
+    public function lognout(){
+       session_unset();
+       session_destroy();
+       header('location:indext.php?');
+       exit();
+    }
 }
 
 ?>

@@ -11,6 +11,7 @@ require_once '../controllers/admin/OrderAdminController.php';
 require_once '../controllers/client/homeController.php';
 require_once '../controllers/client/authControllerAdmin.php';
 require_once '../controllers/client/profileController.php';
+require_once '../controllers/client/orderController.php';
 
 
 //==========Admin=========
@@ -24,6 +25,7 @@ $orderAdmin = new OrderAdminController();
 $home = new homeController();
 $auth = new authControllerAdmin();
 $profile = new profileController;
+$order = new orderController();
 
 
 $action = isset($_GET['act']) ? $_GET['act'] : 'indext';
@@ -113,8 +115,14 @@ switch ($action) {
     case 'register':
         $auth->createUser();
         break;
+    case 'lognout':
+        $auth->lognout();
+        break;
     case 'profile':
         include '../view/client/profile/profile.php';
+        break;
+    case 'updatePass':
+        $profile->passUpdate();
         break;
     case 'updateProfile':
         $profile->updateProfile();
@@ -125,5 +133,10 @@ switch ($action) {
         // ============CART=============
     case 'cart':
         include '../view/client/cart/list.php';
+        break;
+
+        // ============CHECKOUT=============
+    case 'checkout':
+       $order->checkout();
         break;
 }

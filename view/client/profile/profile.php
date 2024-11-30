@@ -38,7 +38,7 @@
                                                 <div class="col-lg-6 col-md-6">
                                                     <div class="billing-info">
                                                         <label>Số diện thoại</label>
-                                                        <input type="number" name="phone" value="<?= $_SESSION['user']['phone'] ?>">
+                                                        <input type="tel" name="phone" value="<?= $_SESSION['user']['phone'] ?>">
                                                     </div>
                                                     <?php if (isset($_SESSION['errors']['phone'])) { ?>
                                                         <p class="text-danger"><?= $_SESSION['errors']['phone'] ?></p>
@@ -90,39 +90,50 @@
                                 <h3 class="panel-title"><span>2 .</span> <a data-bs-toggle="collapse" href="#my-account-2">Đổi mật khẩu </a></h3>
                             </div>
                             <div id="my-account-2" class="panel-collapse collapse" data-bs-parent="#faq">
-                                <div class="panel-body">
-                                    <div class="myaccount-info-wrapper">
-                                        <div class="account-info-wrapper">
-                                            <h4>Change Password</h4>
-                                            <h5>Your Password</h5>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="billing-info">
-                                                    <label>Password</label>
-                                                    <input type="password">
+                                <form action="indext.php?act=updatePass&id=<?= $_SESSION['user']['user_id'] ?>" method="post">
+                                    <div class="panel-body">
+                                        <div class="myaccount-info-wrapper">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12">
+                                                    
+                                                    <div class="billing-info">
+                                                        <label>Mật khẩu cũ</label>
+                                                        <input type="password" name="oldPass">
+                                                    </div>
+                                                    <?php if (isset($_SESSION['errors']['oldPass'])) { ?>
+                                                        <p class="text-danger"><?= $_SESSION['errors']['oldPass'] ?></p>
+                                                    <?php } ?>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="billing-info">
+                                                        <label>Mật khẩu mới</label>
+                                                        <input type="password" name="newPass">
+                                                    </div>
+                                                    <?php if (isset($_SESSION['errors']['newPass'])) { ?>
+                                                        <p class="text-danger"><?= $_SESSION['errors']['newPass'] ?></p>
+                                                    <?php } ?>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="billing-info">
+                                                        <label>Xác nhận mật khẩu mới</label>
+                                                        <input type="password" name="checkNewPass">
+                                                    </div>
+                                                    <?php if (isset($_SESSION['errors']['checkNewPass'])) { ?>
+                                                        <p class="text-danger"><?= $_SESSION['errors']['checkNewPass'] ?></p>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="billing-info">
-                                                    <label>Password Confirm</label>
-                                                    <input type="password">
+                                            <div class="billing-back-btn">
+                                                <div class="billing-btn">
+                                                    <button type="submit" name="updatePass">Đổi mật khẩu</button>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="billing-back-btn">
-                                            <div class="billing-back">
-                                                <a href="#"><i class="fa fa-arrow-up"></i> back</a>
-                                            </div>
-                                            <div class="billing-btn">
-                                                <button type="submit">Continue</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
-                        <div class="panel panel-default single-my-account">
+                        <!-- <div class="panel panel-default single-my-account">
                             <div class="panel-heading my-account-title">
                                 <h3 class="panel-title"><span>3 .</span> <a data-bs-toggle="collapse" href="#my-account-3">Modify your address book entries </a></h3>
                             </div>
@@ -160,10 +171,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="panel panel-default single-my-account">
                             <div class="panel-heading my-account-title">
-                                <h3 class="panel-title"><span>4 .</span> <a href="wishlist.html">Giỏ hàng của tôi </a></h3>
+                                <h3 class="panel-title"><span>3 .</span> <a href="wishlist.html">Giỏ hàng của tôi </a></h3>
                             </div>
                         </div>
                     </div>
