@@ -132,9 +132,12 @@
                      <div class="tp-checkout-payment">
                         <div class="tp-checkout-payment-item">
                            <input type="radio" id="cod" name="payment" value="COD">
-                           <label for="cod">Cash on Delivery</label>
+                           <label for="cod">COD</label>
                         </div>
-                        
+                        <div class="tp-checkout-payment-item">
+                           <input type="radio" id="VNPAY" name="payment" value="VNPAY">
+                           <label for="VNPAY">VN PAY</label>
+                        </div>
                      </div>
                      <div class="tp-checkout-btn-wrapper">
                         <button type="submit" name="place_order" class="tp-checkout-btn w-100">Thanh toán</button>

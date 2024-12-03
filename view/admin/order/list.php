@@ -14,68 +14,48 @@
                                 <table class="table all-package order-table theme-table" id="table_id">
                                     <thead>
                                         <tr>
-                                            <th>Ảnh sản phẩm</th>
-                                            <th>Ngày đặt</th>
                                             <th>Mã đơn hàng</th>
-                                            <th>Số lượng</th>
                                             <th>Tổng tiền</th>
+                                            <th>Ngày đặt</th>
                                             <th>Trạng thái đơn</th>
                                             <th>Option</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        <tr data-bs-toggle="offcanvas" href="#order-details">
-                                            <td>
-                                                <a class="d-block">
-                                                    <span class="order-image">
-                                                        <img src="assets/images/product/1.png"
-                                                            class="img-fluid" alt="users">
-                                                    </span>
-                                                </a>
-                                            </td>
+                                        <?php foreach ($orders as $order) { ?>
+                                            <tr data-bs-toggle="offcanvas" href="#order-details">
+                                                <td>#<?= $order['detail_id'] ?></td>
+                                                <td><?= number_format($order['amount'] * 1000) ?>đ</td>
 
-                                            <td>Jul 20, 2022</td>
+                                                <td><?= date('d-M-Y', strtotime($order['created_at'])) ?></td>
+                                                <?php if ($order['status'] == 'Canceled') { ?>
+                                                    <td class="order-danger">
+                                                        <span><?= $order['status'] ?></span>
+                                                    </td>
+                                                <?php } else { ?>
+                                                    <td class="<?= $order['status'] == 'Pending' ? 'order-pending' : 'order-success' ?>">
+                                                        <span><?= $order['status'] ?></span>
+                                                    </td>
+                                                <?php } ?>
+                                                <td>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="indext.php?act=edit_order&id=<?= $order['detail_id'] ?>">
+                                                                <i class="ri-eye-line"></i>
+                                                            </a>
+                                                        </li>
 
-                                            <td> 406-4883635</td>
+                                                        <li>
+                                                            <a href="indext.php?act=edit_order&id=<?= $order['detail_id'] ?>">
+                                                                <i class="ri-pencil-line"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
 
-                                            <td>Paypal</td>
-
-                                            <td>$15</td>
-
-                                            <td class="order-success">
-                                                <span>Success</span>
-                                            </td>   
-
-                                            <td>
-                                                <ul>
-                                                    <li>
-                                                        <a href="order-detail.html">
-                                                            <i class="ri-eye-line"></i>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="javascript:void(0)">
-                                                            <i class="ri-pencil-line"></i>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModalToggle">
-                                                            <i class="ri-delete-bin-line"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="btn btn-sm btn-solid text-white"
-                                                            href="order-tracking.html">
-                                                            Tracking
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

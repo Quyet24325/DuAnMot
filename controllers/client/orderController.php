@@ -33,11 +33,9 @@ class orderController
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['place_order'])) {
             $carts = $this->cart->getAllCart();
-            // echo "<pre>";
-            // print_r($_POST);
-            // echo "<pre>";
-            // var_dump($_POST['cou_id']);
             $orderdetail = $this->order->addOrrderDetail($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['address'],$_POST['amount'],$_POST['note'],$_POST['ship_id'],$_POST['cou_id'],$_POST['payment']);
+            
+            
             if ($orderdetail) {
                 $detail_id = $this->order->getLastInsertId();
                 foreach ($carts as $cart) {

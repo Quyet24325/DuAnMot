@@ -73,6 +73,7 @@ switch ($action) {
         $categoryAdmin->deleteCategory();
         break;
 
+
         // ============User=============
     case 'user':
         $userAdmin->user();
@@ -88,8 +89,13 @@ switch ($action) {
     case 'order':
         $orderAdmin->listOrder();
         break;
-
-
+    case 'edit_order':
+        $orderAdmin->orderById();
+        break;
+    case 'update_order':
+        $orderAdmin->update();
+        break;
+    
 
 
         // ============COUPONS=============
