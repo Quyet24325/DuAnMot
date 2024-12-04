@@ -7,6 +7,7 @@ require_once '../controllers/admin/ProductAdminController.php';
 require_once '../controllers/admin/UserAdminController.php';
 require_once '../controllers/admin/CouponAdminController.php';
 require_once '../controllers/admin/OrderAdminController.php';
+require_once '../controllers/admin/AuthAdminControllor.php';
 //==========clinet=========
 require_once '../controllers/client/homeController.php';
 require_once '../controllers/client/cartController.php';
@@ -21,6 +22,7 @@ $productAdmin = new ProductAdminController();
 $userAdmin = new UserAdminController();
 $couponAdmin = new CouponAdminController();
 $orderAdmin = new OrderAdminController();
+$authAdmin = new AuthAdminController();
 
 //==========clinet=========
 $home = new homeController();
@@ -32,44 +34,63 @@ $order = new orderController();
 $action = isset($_GET['act']) ? $_GET['act'] : 'indext';
 switch ($action) {
         // ============ADMIN=============
+    case 'auth':
+        $authAdmin->singin();
+        break;
+    case 'logout_admin':
+        $authAdmin->logout();
+        break;
     case 'admin':
+        $authAdmin->middleware();
         include '../view/admin/indext.php';
         break;
     case 'product':
+        $authAdmin->middleware();
         $productAdmin->indext();
         break;
     case 'product_create':
+        $authAdmin->middleware();
         $productAdmin->createProduct();
         break;
     case 'product_postCreate':
+        $authAdmin->middleware();
         $productAdmin->postCreate();
         break;
     case 'update_product':
+        $authAdmin->middleware();
         $productAdmin->update();
         break;
     case 'product_edit':
+        $authAdmin->middleware();
         $productAdmin->edit();
         break;
     case 'delete_image_gallery':
+        $authAdmin->middleware();
         $productAdmin->delete_image_gallery();
         break;
     case 'delete_variant':
+        $authAdmin->middleware();
         $productAdmin->delete_variant();
         break;
     case 'product_delete':
+        $authAdmin->middleware();
         $productAdmin->deleteProduct();
         break;
     case 'category':
+        $authAdmin->middleware();
         $categoryAdmin->index();
         break;
     case 'category_create':
+        $authAdmin->middleware();
         $categoryAdmin->addCategory();
         break;
     case 'category_edit':
+        $authAdmin->middleware();
         $categoryAdmin->updateCategory();
 
         break;
     case 'category_delete':
+        $authAdmin->middleware();
         $categoryAdmin->deleteCategory();
         break;
 
@@ -111,6 +132,8 @@ switch ($action) {
     case 'delete':
         $couponAdmin->delete();
         break;
+
+
 
         // ============CLIENT=============
     case 'indext':

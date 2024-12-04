@@ -164,7 +164,7 @@
                             <div class="media profile-media">
                                 <img class="user-profile rounded-circle" src="admin/assets/images/users/4.jpg" alt="">
                                 <div class="user-name-hide media-body">
-                                    <span>Emay Walter</span>
+                                    <span><?= $_SESSION['user_admin']['name'] ?></span>
                                     <p class="mb-0 font-roboto">Admin<i class="middle ri-arrow-down-s-line"></i></p>
                                 </div>
                             </div>
@@ -194,8 +194,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                        href="javascript:void(0)">
+                                    <a href="indext.php?act=logout_admin">
                                         <i data-feather="log-out"></i>
                                         <span>Log out</span>
                                     </a>

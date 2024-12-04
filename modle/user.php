@@ -91,4 +91,15 @@ class user extends connect
         $stmt = $this->connect()->prepare($sql);
         return $stmt->execute([$role_id,$user_id]);
     }
+
+    public function authAdmin($email,$pass){
+        $sql="select * from user where email = ?";
+        $stmt=$this->connect()->prepare($sql);
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
+        if ($user && $user['role_id'] == 1 && password_verify($pass,$user['pass'])) {
+            return $user;
+        }
+        return false;
+    }
 }
