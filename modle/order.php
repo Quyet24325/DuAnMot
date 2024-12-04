@@ -116,5 +116,10 @@ class order extends connect
         $stmt->execute([$_SESSION['user']['user_id']]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-   
+    
+    public function cancelOrder(){
+        $sql = 'update order_details set status = "Canceled",updated_at = now() where detail_id=?';
+        $stmt = $this->connect()->prepare($sql);
+        return $stmt->execute([$_GET['detail_id']]);
+    }
 }

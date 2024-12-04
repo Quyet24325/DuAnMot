@@ -165,4 +165,7 @@ switch ($action) {
     case 'track_order_detail':
         $order->trackOrderDetail();
         break;
+    case 'cancel_order':
+        $order->cancel();
+        break;
 }

@@ -75,10 +75,20 @@ class orderController
         $coupons = $this->order->getCouponById($_GET['id']);
         $ships = $this->order->getShipById($_GET['id']);
         $handleCoupon = $this->handleCoupon($coupons, $detailById['amount']);
-        // echo '<pre>';
-        // print_r($ships);
-        // echo '<pre>';
         include '../view/client/cart/trackOrderDetail.php';
+    }
+
+    public function cancel(){
+        try {
+            $this->order->cancelOrder();
+            $_SESSION['success'] = 'Hủy đơn hàng thành công.';
+            header("location:".$_SERVER['HTTP_REFERER']);
+            exit();
+        } catch (\Throwable $th) {
+            $_SESSION['error'] = 'Hủy đơn hàng thất bại.';
+            header("location".$_SERVER['HTTP_REFERER']);
+            exit();
+        }
     }
     
 }
