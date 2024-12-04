@@ -13,8 +13,11 @@ class authControllerAdmin extends user
             if (empty($_POST['email']) && !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                 $errors['email'] = 'Vui lòng nhập email của bạn.';
             }
-            if (empty($_POST['pass']) && strlen($_POST['pass']) < 6) {
-                $errors['pass'] = 'Vui lòng nhập mật khẩu của tài khoản.Mật khẩu chứa ít nhất 6 ký tự';
+            if (empty($_POST['pass']) ) {
+                $errors['pass'] = 'Vui lòng nhập mật khẩu.';
+            }
+            if (strlen($_POST['pass']) < 6) {
+                $errors['pass'] = 'Mật khẩu chứa ít nhất 6 kí tự.';
             }
 
             $_SESSION['errors'] = $errors;

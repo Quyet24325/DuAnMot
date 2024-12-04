@@ -14,7 +14,7 @@ class cartController extends cart{
     public function addToCartOrByNow(){
         if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])){
             if(empty($_POST['variant_id'])){
-                $_SESSION['errors']= 'vui lòng chọn màu sắc và size sản phẩm.';
+                $_SESSION['error']= 'vui lòng chọn màu sắc và size sản phẩm.';
                 header('location:'.$_SERVER['HTTP_REFERER']);
                 exit();
             }

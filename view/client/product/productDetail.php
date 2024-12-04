@@ -113,9 +113,6 @@
                                 <a href="#"><i class="pe-7s-shuffle"></i></a>
                             </div>
                         </div>
-                        <div class="pro-details-cart btn-hover">
-                            <a href="indext.php?act=checkout" class="tp-product-details-add-to-cart-btn w-100">mua ngay</a>
-                        </div>
                         <div class="pro-details-social">
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>

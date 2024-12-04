@@ -78,13 +78,6 @@
                                 </div>
                                 <h5>Giá sản phẩm <span><?= number_format($sum * 1000) ?>đ</span></h5>
                                 <h5>mã giảm giá <span>-<?= number_format(($_SESSION['totalCoupon'] ?? 0) * 1000) ?>đ</span></h5>
-                                <div class="total-shipping">
-                                    <h5>Tổng chi phí vận chuyển</h5>
-                                    <ul>
-                                        <li><input type="checkbox"> Standard <span>$20.00</span></li>
-                                        <li><input type="checkbox"> Express <span>$30.00</span></li>
-                                    </ul>
-                                </div>
                                 <h4 class="grand-totall-title">Tổng cộng <span><?= number_format(($sum - ($_SESSION['totalCoupon'] ?? 0)) * 1000) ?>đ</span></h4>
                                 <a href="indext.php?act=checkout">Mua hàng</a>
                             </div>

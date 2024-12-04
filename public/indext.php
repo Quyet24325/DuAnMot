@@ -95,7 +95,7 @@ switch ($action) {
     case 'update_order':
         $orderAdmin->update();
         break;
-    
+
 
 
         // ============COUPONS=============
@@ -151,11 +151,18 @@ switch ($action) {
         $cart->addToCartOrByNow();
         break;
 
+
         // ============CHECKOUT=============
     case 'checkout':
         $order->indext();
         break;
     case 'place_order':
         $order->checkout();
+        break;
+    case 'track_order':
+        $order->trackOrder();
+        break;
+    case 'track_order_detail':
+        $order->trackOrderDetail();
         break;
 }

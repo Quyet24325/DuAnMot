@@ -55,4 +55,30 @@ class orderController
             }
         }
     }
+
+    public function trackOrder(){
+        $orders = $this->order->getOrderDetailByUserId();
+        include '../view/client/cart/trackOrder.php';
+    }
+    public function handleCoupon($coupon, $total)
+    {
+        if ($coupon['type'] == 'Percentage') {
+            $totalCoupon = ($total * ($coupon['coupon_value'] / 100));
+        } elseif ($coupon['type'] == 'Fixed Amount') {
+            $totalCoupon = $coupon['coupon_value'];
+        }
+        return $totalCoupon ?? 0;
+    }
+    public function trackOrderDetail(){
+        $orderById = $this->order->getOrderById($_GET['id']);
+        $detailById = $this->order->getOrderDetailById($_GET['id']);
+        $coupons = $this->order->getCouponById($_GET['id']);
+        $ships = $this->order->getShipById($_GET['id']);
+        $handleCoupon = $this->handleCoupon($coupons, $detailById['amount']);
+        // echo '<pre>';
+        // print_r($ships);
+        // echo '<pre>';
+        include '../view/client/cart/trackOrderDetail.php';
+    }
+    
 }

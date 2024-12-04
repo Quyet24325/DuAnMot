@@ -109,5 +109,12 @@ class order extends connect
         return $stmt->execute([$status, $_GET['detail_id']]);
     }
 
+    public function getOrderDetailByUserId()
+    {
+        $sql = "select * from order_details where user_id=?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$_SESSION['user']['user_id']]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
    
 }
