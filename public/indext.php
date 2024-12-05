@@ -191,4 +191,7 @@ switch ($action) {
     case 'cancel_order':
         $order->cancel();
         break;
+    case 'vnpay_return':
+        $order->vnpayReturn();
+        break;
 }
