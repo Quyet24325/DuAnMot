@@ -107,10 +107,11 @@
                                                         <input type="hidden" name="var_id[]" value="<?= $value['var_id'] ?>">
                                                         <label class="col-sm-6 col-form-label form-label-title">Dung lượng</label>
                                                         <div class="sm-5">
-                                                            <?php foreach ($listSize as $size) { ?>
-                                                                <input type="checkbox" name="varian_size[]" id="size-<?= $size['var_size_id'] ?>-<?= $key ?>" value="<?= $size['var_size_id'] ?>" <?= $value['var_size_id'] == $size['var_size_id'] ? 'checked' : '' ?>>
-                                                                <label class="form-label-title col-sm-3 mb-0" for="<?= $size['var_size_id'] ?>-<?= $key ?>"><?= $size['name'] ?></label>
-                                                            <?php } ?>
+                                                            <select name="varian_size[]" id="" style="width: 90%;">
+                                                                <?php foreach ($listSize as $size) { ?>
+                                                                    <option value="<?= $size['var_size_id'] ?>" <?= $value['var_size_id'] == $size['var_size_id'] ? 'selected' : '' ?> id="size-<?= $size['var_size_id'] ?>"><?= $size['name'] ?></option>
+                                                                <?php } ?>
+                                                            </select>
 
                                                         </div>
                                                         <?php if (isset($_SESSION['errors']['varian_size'])) { ?>
@@ -120,14 +121,14 @@
                                                     <div class="col-lg-5">
                                                         <label class="col-sm-6 col-form-label form-label-title">Màu sắc</label>
                                                         <div class="sm-5">
-                                                            <?php foreach ($listColor as $color) { ?>
-                                                                <input type="checkbox" name="varian_color[]" id="color-<?= $color['var_color_id'] ?>-<?= $key ?>" value="<?= $color['var_color_id'] ?>" <?= $value['var_color_id'] == $color['var_color_id'] ? 'checked' : '' ?>>
-                                                                <label class="form-label-title col-sm-3 mb-0" for="color-<?= $color['var_color_id'] ?>-<?= $key ?>">
-                                                                    <svg height="35" width="35" xmlns="http://www.w3.org/2000/svg">
-                                                                        <circle r="13   " cx="15" cy="15" fill="<?= $color['code'] ?>" stroke="black" stroke-width="3" />
-                                                                    </svg>
-                                                                </label>
-                                                            <?php } ?>
+                                                            <select name="varian_color[]" id="" style="width: 90%;">
+                                                                <?php foreach ($listColor as $color) { ?>
+                                                                    <option value="<?= $color['var_color_id'] ?>" <?= $value['var_color_id'] == $color['var_color_id'] ? 'selected' : '' ?> id="color-<?= $color['var_color_id'] ?>">
+                                                                        <?= $color['name'] ?>
+                                                                    </option>
+                                                                <?php } ?>
+                                                            </select>
+                                                            
                                                         </div>
                                                         <?php if (isset($_SESSION['errors']['varian_color'])) { ?>
                                                             <p class="text-danger"><?= $_SESSION['errors']['varian_color'] ?></p>
@@ -230,23 +231,23 @@
                                                 <div class="col-lg-5">
                                                     <label class="col-sm-6 col-form-label form-label-title" id="size-<?= $size['var_size_id'] ?>-${container.children.length}">Dung lượng</label> 
                                                         <div class="sm-5">
-                                                        <?php foreach ($listSize as $size) { ?>
-                                                            <input type="checkbox" name="varian_size[]" value="<?= $size['var_size_id'] ?>">
-                                                            <label class="form-label-title col-sm-3 mb-0" for="size-<?= $size['var_size_id'] ?>-${container.children.length}"><?= $size['name'] ?></label>
-                                                        <?php } ?>
+                                                        <select name="varian_size[]" id="" style="width: 90%;">
+                                                            <?php foreach ($listSize as $size) { ?>
+                                                                <option value="<?= $size['var_size_id'] ?>" id="size-<?= $size['var_size_id'] ?>"><?= $size['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
                                                         </div>
                                                 </div>
                                                 <div class="col-lg-5">
                                                     <label class="col-sm-4 col-form-label form-label-title">Màu sắc</label>
                                                     <div class="sm-5">
-                                                    <?php foreach ($listColor as $color) { ?>
-                                                            <input type="checkbox" name="varian_color[]" id="color-<?= $color['var_color_id'] ?>-${container.children.length}" value="<?= $color['var_color_id'] ?>">
-                                                            <label class="form-label-title col-sm-3 mb-0" for="color-<?= $color['var_color_id'] ?>-${container.children.length}">
-                                                                <svg height="35" width="35" xmlns="http://www.w3.org/2000/svg">
-                                                                    <circle r="13   " cx="15" cy="15" fill="<?= $color['code'] ?>" stroke="black" stroke-width="3" />
-                                                                </svg>
-                                                            </label>
-                                                        <?php } ?>
+                                                    <select name="varian_color[]" id="" style="width: 90%;">
+                                                            <?php foreach ($listColor as $color) { ?>
+                                                                <option value="<?= $color['var_color_id'] ?>" id="color-<?= $color['var_color_id'] ?>">
+                                                                <?= $color['name'] ?>
+                                                                </option>
+                                                            <?php } ?>
+                                                    </select>
                                                     </div>
                                                 </div>
 

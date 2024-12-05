@@ -260,7 +260,12 @@ class ProductAdminController extends product
 
     public function deleteProduct()
     {
+        
+        // echo '<pre>';
+        // print_r($product);
+        // echo '<pre>';
         try {
+            $product = $this->getProductId($_GET['id']);
             $galleries = $this->getProductGalleryId();
             foreach ($galleries as $gallery) {
                 if (file_exists('./images/gallery_product/' . $gallery['image'])) {
@@ -268,11 +273,12 @@ class ProductAdminController extends product
                 }
             }
             $this->deleteProductId();
+            unlink('./images/product/' . $product['pro_image']);
             $_SESSION['success'] = "Xóa sản phẩm thành công";
             header("location:" . $_SERVER['HTTP_REFERER']);
             exit();
         } catch (\Throwable $th) {
-            $_SESSION['errors'] = "Xóa phẩm thất bại.";
+            $_SESSION['error'] = "Xóa phẩm thất bại.";
             header("location:" . $_SERVER['HTTP_REFERER']);
             exit();
         }

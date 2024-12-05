@@ -41,7 +41,7 @@ class AuthAdminController extends user
                 header('location: indext.php?act=admin');
                 exit();
             } else {
-                $_SESSION['error'] = 'Bạn không có quyền truy cập';
+                $_SESSION['error'] = 'Tài khoản của bạn không có quyền truy cập vào trang quản trị';
                 header('location: indext.php');
                 exit();
             }

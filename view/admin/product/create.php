@@ -48,14 +48,14 @@
                                         </div>
                                         <div class="mb-4 col-rg-5">
                                             <div class="col-sm-12">
-                                            <label class="col-sm-6 col-form-label form-label-title" id="product_image" >Ảnh sản phẩm</label>
+                                                <label class="col-sm-6 col-form-label form-label-title" id="product_image">Ảnh sản phẩm</label>
                                                 <input type="file" name="product_image" id="" class="form-control">
                                             </div>
                                             <?php if (isset($_SESSION['errors']['product_image'])) { ?>
                                                 <p class="text-danger"><?= $_SESSION['errors']['product_image'] ?></p>
                                             <?php } ?>
                                             <div class="col-sm-12">
-                                            <label class="col-sm-6 col-form-label form-label-title" >Đường dẫn</label>
+                                                <label class="col-sm-6 col-form-label form-label-title">Đường dẫn</label>
                                                 <input type="text" name="slug" id="slug" class="form-control">
                                             </div>
                                         </div>
@@ -86,14 +86,14 @@
                                     <div id="variants">
                                         <div class="border rounded px-2 mb-4">
                                             <div class="row mb-5">
-                                                <div class="col-lg-5">
+                                                <div class="col-lg-6">
                                                     <label class="col-sm-6 col-form-label form-label-title">Dung lượng</label>
-                                                    <div class="sm-5">
-                                                        <?php foreach ($listSize as $size) { ?>
-                                                            <input type="checkbox" name="varian_size[]" id="size-<?= $size['var_size_id'] ?>" value="<?= $size['var_size_id'] ?>">
-                                                            <label class="form-label-title col-sm-3 mb-0" for="<?= $size['var_size_id'] ?>"><?= $size['name'] ?></label>
-                                                        <?php } ?>
-
+                                                    <div class="sm-6">
+                                                        <select name="varian_size[]" id="" style="width: 90%;">
+                                                            <?php foreach ($listSize as $size) { ?>
+                                                                <option value="<?= $size['var_size_id'] ?>" id="size-<?= $size['var_size_id'] ?>"><?= $size['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
                                                     </div>
                                                     <?php if (isset($_SESSION['errors']['varian_size'])) { ?>
                                                         <p class="text-danger"><?= $_SESSION['errors']['varian_size'] ?></p>
@@ -102,14 +102,13 @@
                                                 <div class="col-lg-5">
                                                     <label class="col-sm-6 col-form-label form-label-title">Màu sắc</label>
                                                     <div class="sm-5">
-                                                        <?php foreach ($listColor as $color) { ?>
-                                                            <input type="checkbox" name="varian_color[]" id="color-<?= $color['var_color_id'] ?>" value="<?= $color['var_color_id'] ?>">
-                                                            <label class="form-label-title col-sm-3 mb-0" for="color-<?= $color['var_color_id'] ?>">
-                                                                <svg height="35" width="35" xmlns="http://www.w3.org/2000/svg">
-                                                                    <circle r="13   " cx="15" cy="15" fill="<?= $color['code'] ?>" stroke="black" stroke-width="3" />
-                                                                </svg>
-                                                            </label>
-                                                        <?php } ?>
+                                                        <select name="varian_color[]" id="" style="width: 90%;">
+                                                            <?php foreach ($listColor as $color) { ?>
+                                                                <option value="<?= $color['var_color_id'] ?>" id="color-<?= $color['var_color_id'] ?>">
+                                                                    <?= $color['name'] ?>
+                                                                </option>
+                                                            <?php } ?>
+                                                        </select>
                                                     </div>
                                                     <?php if (isset($_SESSION['errors']['varian_color'])) { ?>
                                                         <p class="text-danger"><?= $_SESSION['errors']['varian_color'] ?></p>
@@ -140,10 +139,10 @@
                                                         <input class="form-control" type="text" id="variant_price" name="variant_price[]" placeholder="Nhập giá sản phẩm biến thể">
                                                     </div>
                                                     <?php if (isset($_SESSION['errors']['varian_color'])) { ?>
-                                                            <?php foreach (($_SESSION['errors']['variant_price']) as $variant_price) { ?>
-                                                                <p class="text-danger"><?= $variant_price ?></p>
-                                                            <?php }  ?>
-                                                        <?php } ?>
+                                                        <?php foreach (($_SESSION['errors']['variant_price']) as $variant_price) { ?>
+                                                            <p class="text-danger"><?= $variant_price ?></p>
+                                                        <?php }  ?>
+                                                    <?php } ?>
                                                 </div>
 
                                                 <div class="col-sm-6">
@@ -152,10 +151,10 @@
                                                         <input class="form-control" type="text" id="variant_sale_price" name="variant_sale_price[]" placeholder="Nhập giá khuyến mại sản phẩm biến thể">
                                                     </div>
                                                     <?php if (isset($_SESSION['errors']['varian_color'])) { ?>
-                                                            <?php foreach (($_SESSION['errors']['variant_sale_price']) as $variant_sale_price) { ?>
-                                                                <p class="text-danger"><?= $variant_sale_price ?></p>
-                                                            <?php }  ?>
-                                                        <?php } ?>
+                                                        <?php foreach (($_SESSION['errors']['variant_sale_price']) as $variant_sale_price) { ?>
+                                                            <p class="text-danger"><?= $variant_sale_price ?></p>
+                                                        <?php }  ?>
+                                                    <?php } ?>
                                                 </div>
 
                                             </div>
@@ -210,24 +209,26 @@
                                             <div class="row mb-5">
                                                 <div class="col-lg-5">
                                                     <label class="col-sm-6 col-form-label form-label-title" id="size-<?= $size['var_size_id'] ?>-${container.children.length}">Dung lượng</label> 
-                                                        <div class="sm-5">
-                                                        <?php foreach ($listSize as $size) { ?>
-                                                            <input type="checkbox" name="varian_size[]" value="<?= $size['var_size_id'] ?>">
-                                                            <label class="form-label-title col-sm-3 mb-0" for="size-<?= $size['var_size_id'] ?>-${container.children.length}"><?= $size['name'] ?></label>
-                                                        <?php } ?>
+                                                        <div class="sm-6">
+
+                                                        <select name="varian_size[]" id="" style="width: 90%;">
+                                                            <?php foreach ($listSize as $size) { ?>
+                                                                <option value="<?= $size['var_size_id'] ?>" id="size-<?= $size['var_size_id'] ?>"><?= $size['name'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                        
                                                         </div>
                                                 </div>
                                                 <div class="col-lg-5">
                                                     <label class="col-sm-4 col-form-label form-label-title">Màu sắc</label>
                                                     <div class="sm-5">
-                                                    <?php foreach ($listColor as $color) { ?>
-                                                            <input type="checkbox" name="varian_color[]" id="color-<?= $color['var_color_id'] ?>-${container.children.length}" value="<?= $color['var_color_id'] ?>">
-                                                            <label class="form-label-title col-sm-3 mb-0" for="color-<?= $color['var_color_id'] ?>-${container.children.length}">
-                                                                <svg height="35" width="35" xmlns="http://www.w3.org/2000/svg">
-                                                                    <circle r="13   " cx="15" cy="15" fill="<?= $color['code'] ?>" stroke="black" stroke-width="3" />
-                                                                </svg>
-                                                            </label>
-                                                        <?php } ?>
+                                                     <select name="varian_color[]" id="" style="width: 90%;">
+                                                            <?php foreach ($listColor as $color) { ?>
+                                                                <option value="<?= $color['var_color_id'] ?>" id="color-<?= $color['var_color_id'] ?>">
+                                                                <?= $color['name'] ?>
+                                                                </option>
+                                                            <?php } ?>
+                                                    </select>
                                                     </div>
                                                 </div>
 
@@ -264,6 +265,6 @@
     </script>
 
 </div>
-<?php 
-unset($_SESSION['errors']);  
+<?php
+unset($_SESSION['errors']);
 include '../view/admin/layout/footer.php' ?>

@@ -71,7 +71,7 @@
                                                     </li>
 
                                                     <li>
-                                                        <a href="indext.php?act=product_delete&id=<?= $product['pro_id'] ?>">
+                                                        <a href="indext.php?act=product_delete&id=<?= $product['pro_id'] ?>" onclick="return confirm('Bạn có muốn xóa sản phẩm này không?')">
                                                             <i class="ri-delete-bin-line"></i>
                                                         </a>
                                                     </li>
