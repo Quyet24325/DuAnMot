@@ -176,14 +176,16 @@ class product extends connect
         return $stmt->execute([$_GET['var_id']]);
     }
 
-    public function deleteProductId() {
-        $sql='delete from products where pro_id=?';
-        $stmt=$this->connect()->prepare($sql);
+    public function deleteProductId()
+    {
+        $sql = 'delete from products where pro_id=?';
+        $stmt = $this->connect()->prepare($sql);
         return $stmt->execute([$_GET['id']]);
     }
 
 
-    public function getProductBySlug($slug) {
+    public function getProductBySlug($slug)
+    {
         $sql = 'select
                     products.pro_id as pro_id,
                     products.name as pro_name,
@@ -209,20 +211,20 @@ class product extends connect
                 left join variant_color on product_variants.var_color_id = variant_color.var_color_id
                 left join variant_size on product_variants.var_size_id = variant_size.var_size_id
                 where products.slug=?';
-        
+
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$slug]);
         $listProduct = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
+
         $groupProduct = [];
-       
+
         foreach ($listProduct as $product) {
             if (!isset($groupProduct[$product['pro_id']])) {
                 $groupProduct[$product['pro_id']] = $product;
                 $groupProduct[$product['pro_id']]['variants'] = [];
                 $groupProduct[$product['pro_id']]['product_gallery_images'] = [];
             }
-            
+
             $exists = false;
             foreach ($groupProduct[$product['pro_id']]['variants'] as $variant) {
                 if (
@@ -243,13 +245,34 @@ class product extends connect
                     'variant_quantity' => $product['variant_quantity'],
                 ];
             }
-            
-            
-            if (!empty($product['product_gallery_image'] && !in_array($product['product_gallery_image'],$groupProduct[$product['pro_id']]['product_gallery_images']))) {
+
+
+            if (!empty($product['product_gallery_image'] && !in_array($product['product_gallery_image'], $groupProduct[$product['pro_id']]['product_gallery_images']))) {
                 $groupProduct[$product['pro_id']]['product_gallery_images'][] = $product['product_gallery_image'];
             }
         }
-    
+
         return $groupProduct;
+    }
+
+    public function search($keyword)
+    {
+        $sql = "SELECT
+                products.pro_id as pro_id,
+                products.name as pro_name,
+                products.image as pro_image,
+                products.price as pro_price,
+                products.slug as pro_slug,
+                products.sale_price as pro_sale_price,
+                categories.name as cate_name
+          FROM
+          products
+          LEFT JOIN
+          categories ON products.cate_id = categories.cate_id
+           where lower(products.name) like lower(?) 
+           ";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute(['%' . $keyword . '%']);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
