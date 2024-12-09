@@ -291,9 +291,6 @@
                                         <li>
                                             <a href="indext.php?act=user">All users</a>
                                         </li>
-                                        <li>
-                                            <a href="add-new-user.html">Add new user</a>
-                                        </li>
                                     </ul>
                                 </li>
 
