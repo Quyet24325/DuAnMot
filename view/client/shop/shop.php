@@ -90,36 +90,39 @@
             <div class="tab-content jump">
                 <div class="tab-pane active" id="product-2">
                     <div class="row">
-                        <?php foreach ($product as $pro) : ?>
+                        <?php if(isset($result)) : ?>
+                            <p>Hiển thị kết quả tìm kiếm <?= $_SESSION['keyword'] ?></p>
+                            <?php endif; ?>
+                            <?php foreach ($products as $pro) : ?>
 
-                            <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6">
-                                <div class="product-wrap mb-25">
-                                    <div class="product-img">
-                                        <a href="indext.php?act=product_detail&slug=<?= $pro['pro_slug'] ?>">
-                                            <img src="./images/product/<?= $pro['pro_image'] ?>" alt="product-category">
-                                        </a>
-                                        <div class="product-action">
-                                            <div class="pro-same-action pro-wishlist">
-                                                <a title="Wishlist" href="?act=wishList-add&pro_id=<?= $pro['pro_id'] ?>"><i class="pe-7s-like"></i></a>
-                                            </div>
-                                            <div class="pro-same-action pro-cart">
-                                                <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Thêm vào giỏ hàng</a>
-                                            </div>
-                                            <div class="pro-same-action pro-quickview">
-                                                <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
+                                <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6">
+                                    <div class="product-wrap mb-25">
+                                        <div class="product-img">
+                                            <a href="indext.php?act=product_detail&slug=<?= $pro['pro_slug'] ?>">
+                                                <img src="./images/product/<?= $pro['pro_image'] ?>" alt="product-category">
+                                            </a>
+                                            <div class="product-action">
+                                                <div class="pro-same-action pro-wishlist">
+                                                    <a title="Wishlist" href="?act=wishList-add&pro_id=<?= $pro['pro_id'] ?>"><i class="pe-7s-like"></i></a>
+                                                </div>
+                                                <div class="pro-same-action pro-cart">
+                                                    <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Thêm vào giỏ hàng</a>
+                                                </div>
+                                                <div class="pro-same-action pro-quickview">
+                                                    <a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="product-content text-center">
-                                        <h3><a href="?act=product_detail&slug=<?= $pro['pro_slug'] ?>"><?= $pro['pro_name'] ?></a></h3>
-                                        <div class="product-price">
-                                            <span class="old"><?= number_format($pro['pro_price'] * 1000, 0, ',', '.') ?>đ</span>
-                                            <span><?= number_format($pro['pro_sale_price'] * 1000, 0, ',', '.') ?>đ</span>
+                                        <div class="product-content text-center">
+                                            <h3><a href="?act=product_detail&slug=<?= $pro['pro_slug'] ?>"><?= $pro['pro_name'] ?></a></h3>
+                                            <div class="product-price">
+                                                <span class="old"><?= number_format($pro['pro_price'] * 1000, 0, ',', '.') ?>đ</span>
+                                                <span><?= number_format($pro['pro_sale_price'] * 1000, 0, ',', '.') ?>đ</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
                     </div>
                 </div>
             </div>

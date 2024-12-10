@@ -14,6 +14,8 @@ require_once '../controllers/client/cartController.php';
 require_once '../controllers/client/authControllerAdmin.php';
 require_once '../controllers/client/profileController.php';
 require_once '../controllers/client/orderController.php';
+require_once '../controllers/client/wishListController.php';
+require_once '../controllers/client/shopController.php';
 
 
 //==========Admin=========
@@ -30,6 +32,8 @@ $cart = new cartController();
 $auth = new authControllerAdmin();
 $profile = new profileController;
 $order = new orderController();
+$wishList = new wishListController();
+$shop = new ShopController();
 
 $action = isset($_GET['act']) ? $_GET['act'] : 'indext';
 switch ($action) {
@@ -191,7 +195,16 @@ switch ($action) {
     case 'cancel_order':
         $order->cancel();
         break;
-    case 'vnpay_return':
-        $order->vnpayReturn();
+    case 'wishList':
+        $wishList->index();
+        break;
+    case 'wishList-add':
+        $wishList->add();
+        break;
+    case 'wishList-delete':
+        $wishList->delete();
+        break;
+    case 'shop':
+        $shop->index();
         break;
 }

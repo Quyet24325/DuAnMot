@@ -101,9 +101,9 @@
                         <div class="same-style header-search">
                             <a class="search-active" href="#"><i class="pe-7s-search"></i></a>
                             <div class="search-content">
-                                <form action="#">
-                                    <input type="text" placeholder="Search" />
-                                    <button class="button-search"><i class="pe-7s-search"></i></button>
+                                <form action="?act=shop" method="post">
+                                    <input type="text" name="keyword" placeholder="Search" />
+                                    <button class="button-search" name="search"><i class="pe-7s-search"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -139,7 +139,7 @@
                                 <?php } ?>
                         </div>
                         <div class="same-style header-wishlist">
-                            <a href="wishlist.html"><i class="pe-7s-like"></i></a>
+                            <a href="?act=wishList"><i class="pe-7s-like"></i></a>
                         </div>
                         <div class="same-style cart-wrap">
                             <a href="?act=cart" class="icon-cart">
