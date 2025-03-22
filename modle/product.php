@@ -37,11 +37,11 @@ class product extends connect
         $stmt = $this->connect()->prepare($sql);
         return $stmt->execute([$pro_id, $image]);
     }
-    public function addProductVariants($price, $sale_price, $quantity, $pro_id, $var_color_id, $var_size_id)
+    public function addProductVariants($price, $sale_price, $var_quantity, $pro_id, $var_color_id, $var_size_id)
     {
-        $sql = 'insert into product_variants(price,sale_price,quantity,pro_id,var_color_id,var_size_id,created_at,updated_at) value(?,?,?,?,?,?,now(),now())'; //noW()->lấy thời gian hiện tại
+        $sql = 'insert into product_variants(price,sale_price,var_quantity,pro_id,var_color_id,var_size_id,created_at,updated_at) value(?,?,?,?,?,?,now(),now())'; //noW()->lấy thời gian hiện tại
         $stmt = $this->connect()->prepare($sql);
-        return $stmt->execute([$price, $sale_price, $quantity, $pro_id, $var_color_id, $var_size_id]);
+        return $stmt->execute([$price, $sale_price, $var_quantity, $pro_id, $var_color_id, $var_size_id]);
     }
     public function getLastInsertId()
     {
@@ -118,7 +118,7 @@ class product extends connect
                 product_variants.var_id as var_id,
                 product_variants.price as var_price,
                 product_variants.sale_price as var_sale_price,
-                product_variants.quantity as var_quantity,
+                product_variants.var_quantity    as var_quantity,
                 product_variants.var_color_id  as var_color_id ,
                 product_variants.var_size_id   as var_size_id  ,
                 variant_color.name  as var_color_name ,
@@ -141,16 +141,16 @@ class product extends connect
     }
 
     //Cập nhập sản phẩm
-    public function updateProduct($pro_id, $name, $image, $price, $sale_price, $slug, $description, $cate_id)
-    {
-        $sql = "update products set name=?, image=?,price=?,sale_price=?,slug=?,description=?,cate_id=?  where pro_id=?";
-        $stmt = $this->connect()->prepare($sql);
-        return $stmt->execute([$name, $image, $price, $sale_price, $slug, $description, $cate_id, $pro_id]);
-    }
+        public function updateProduct($pro_id, $name, $image, $price, $sale_price, $slug, $description, $cate_id)
+        {
+            $sql = "update products set name=?, image=?,price=?,sale_price=?,slug=?,description=?,cate_id=?  where pro_id=?";
+            $stmt = $this->connect()->prepare($sql);
+            return $stmt->execute([$name, $image, $price, $sale_price, $slug, $description, $cate_id, $pro_id]);
+        }
 
     public function updateProductVariant($var_id, $price, $sale_price, $quantity, $pro_id, $var_color_id, $var_size_id)
     {
-        $sql = "update product_variants set price=?,sale_price=?,quantity=?,pro_id=?,var_color_id=?,var_size_id=? where var_id=?";
+        $sql = "update product_variants set price=?,sale_price=?,var_quantity=?,pro_id=?,var_color_id=?,var_size_id=? where var_id=?";
         $stmt = $this->connect()->prepare($sql);
         return $stmt->execute([$price, $sale_price, $quantity, $pro_id, $var_color_id, $var_size_id, $var_id]);
     }
@@ -199,7 +199,7 @@ class product extends connect
                     product_variants.var_id as variant_id,
                     product_variants.price as variant_price,
                     product_variants.sale_price as variant_sale_price,
-                    product_variants.quantity as variant_quantity,
+                    product_variants.var_quantity as variant_quantity,
                     variant_color.name as color_name,
                     variant_color.code as color_code,
                     variant_size.name as size_name,

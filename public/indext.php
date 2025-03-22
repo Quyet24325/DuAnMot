@@ -207,4 +207,8 @@ switch ($action) {
     case 'shop':
         $shop->index();
         break;
+
+    case 'vnpay_return':
+        $order->vnpayReturn();
+        break;
 }

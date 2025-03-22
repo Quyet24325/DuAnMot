@@ -43,7 +43,7 @@
                                             <td class="text-start">
                                                 <h3 style="font-weight: bold;" class="mb-2"><?=$product['pro_name']?></h3>
                                                 <p class="mb-0">
-                                                    <span>Dung lượng : </span>
+                                                    <span>Size : </span>
                                                     <?php foreach ($product['variants'] as $size) { ?>
                                                        <span><?= $size['variant_size'] ?></span>
                                                     <?php } ?>

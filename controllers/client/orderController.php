@@ -22,48 +22,81 @@ class orderController
     }
     public function indext()
     {
-        $user = $this->user->detailUserId($_SESSION['user']['user_id']);
+
+        $user = $this->user->detailUserId($_SESSION['user']['user_id'] ?? '');
         $ships = $this->ship->getAllShip();
-        $carts = $this->cart->getAllCart();
+        if (!empty($user)) {
+            $carts = $this->cart->getAllCart();
+        }
 
         include '../view/client/checkout/checkout.php';
     }
 
     public function checkout()
     {
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['place_order'])) {
-            if ($_POST['payment'] == 'COD') {
-                $carts = $this->cart->getAllCart();
-                $orderdetail = $this->order->addOrrderDetail($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['amount'], $_POST['note'], $_POST['ship_id'], $_POST['cou_id'], $_POST['payment']);
-                if ($orderdetail) {
-                    $detail_id = $this->order->getLastInsertId();
-                    foreach ($carts as $cart) {
-                        $this->order->addOrder($cart['pro_id'], $cart['variant_id'], $cart['quantity'], $detail_id);
-                        $this->cart->deleteCart($cart['cart_id']);
+        if (!empty($_SESSION['user'])) {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['place_order'])) {
+                if ($_POST['payment'] == 'COD') {
+                    $carts = $this->cart->getAllCart();
+                    $orderdetail = $this->order->addOrrderDetail($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['amount'], $_POST['note'], $_POST['ship_id'], $_POST['cou_id'], $_POST['payment']);
+                    if ($orderdetail) {
+                        $detail_id = $this->order->getLastInsertId();
+                        foreach ($carts as $cart) {
+                            $this->order->addOrder($cart['pro_id'], $cart['variant_id'], $cart['quantity'], $detail_id);
+                            $this->cart->deleteCart($cart['cart_id']);
+                        }
+                        unset($_SESSION['total']);
+                        unset($_SESSION['coupon']);
+                        unset($_SESSION['totalCoupon']);
+                        header("location:indext.php");
+                        $_SESSION['success'] = 'Đặt hàng thành công';
+                        exit();
+                    } else {
+                        $_SESSION['error'] = 'Đặt hàng không thành công';
+                        header("location:" . $_SERVER['HTTP_REFERER']);
+                        exit();
                     }
-                    unset($_SESSION['total']);
-                    unset($_SESSION['coupon']);
-                    unset($_SESSION['totalCoupon']);
-                    header("location:indext.php");
-                    $_SESSION['success'] = 'Đặt hàng thành công';
-                    exit();
-                } else {
-                    $_SESSION['error'] = 'Đặt hàng không thành công';
+                } elseif (($_POST['payment'] == 'VNPAY')) {
+                    $carts = $this->cart->getAllCart();
+                    $orderdetail = $this->order->addOrrderDetail($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['amount'], $_POST['note'], $_POST['ship_id'], $_POST['cou_id'], $_POST['payment']);
+
+                    if ($orderdetail) {
+                        $detail_id = $this->order->getLastInsertId();
+                        foreach ($carts as $cart) {
+                            $this->order->addOrder($cart['pro_id'], $cart['variant_id'], $cart['quantity'], $detail_id);
+                            $this->cart->deleteCart($cart['cart_id']);
+                        }
+                        $this->vnpay($detail_id);
+                    }
+                }
+            }
+        } else {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['place_order'])) {
+                if ($_POST['payment'] == 'COD') {
+                    $guest = $this->order->createGuest($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address']);
+                    if ($guest) {
+                        $guestID = $this->order->getLastGuestId();
+                        $orderdetail = $this->order->addOrrderDetailGuest($_POST['name'],$guestID, $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['amount'], $_POST['note'], $_POST['ship_id'], $_POST['cou_id'] ?? 0, $_POST['payment']);
+                        if ($orderdetail) {
+                            $detail_id = $this->order->getLastInsertId();
+                            $this->order->addOrderGest($_POST['pro_id'],$guestID, $_POST['variant_id'], $_POST['quantity'], $detail_id);
+                            unset($_SESSION['guest']);
+                            header("location:indext.php");
+                            $_SESSION['success'] = 'Đặt hàng thành công';
+                            exit();
+                        } else {
+                            $_SESSION['error'] = 'Đặt hàng không thành công';
+                            header("location:" . $_SERVER['HTTP_REFERER']);
+                            exit();
+                        }
+                    }
+
+                    // echo '<pre>';
+                    // print_r($guestID);
+                } elseif (($_POST['payment'] == 'VNPAY')) {
+                    $_SESSION['error'] = 'Bạn chưa có tài khoản. Vui lòng đăngký/đăng nhập để tiếp tục giao dịch.';
                     header("location:" . $_SERVER['HTTP_REFERER']);
                     exit();
-                }
-            } elseif (($_POST['payment'] == 'VNPAY')) {
-                $carts = $this->cart->getAllCart();
-                $orderdetail = $this->order->addOrrderDetail($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['amount'], $_POST['note'], $_POST['ship_id'], $_POST['cou_id'], $_POST['payment']);
-
-                if ($orderdetail) {
-                    $detail_id = $this->order->getLastInsertId();
-                    foreach ($carts as $cart) {
-                        $this->order->addOrder($cart['pro_id'], $cart['variant_id'], $cart['quantity'], $detail_id);
-                        $this->cart->deleteCart($cart['cart_id']);
-                    }
-                    $this->vnpay($detail_id);
                 }
             }
         }
@@ -146,8 +179,12 @@ class orderController
     }
     public function trackOrder()
     {
-        $orders = $this->order->getOrderDetailByUserId();
-        include '../view/client/cart/trackOrder.php';
+        if (empty($_SESSION['user'])) {
+            include '../view/client/cart/trackOrder.php';
+        } else {
+            $orders = $this->order->getOrderDetailByUserId();
+            include '../view/client/cart/trackOrder.php';
+        }
     }
     public function handleCoupon($coupon, $total)
     {

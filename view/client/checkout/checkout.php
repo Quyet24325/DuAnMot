@@ -33,25 +33,25 @@
                            <div class="col-md-12">
                               <div class="tp-checkout-input">
                                  <label>Họ và Tên<span>*</span></label>
-                                 <input type="text" name="name" placeholder="Vui lòng nhập họ và tên" value="<?= $user['name'] ?>">
+                                 <input type="text" name="name" placeholder="Vui lòng nhập họ và tên" value="<?= $user['name'] ?? '' ?>">
                               </div>
                            </div>
                            <div class="col-md-12">
                               <div class="tp-checkout-input">
                                  <label>Số điện thoại<span>*</span></label>
-                                 <input type="tel" name="phone" placeholder="Vui lòng nhập số điện thoại" value="<?= $user['phone'] ?>">
+                                 <input type="tel" name="phone" placeholder="Vui lòng nhập số điện thoại" value="<?= $user['phone'] ?? '' ?>">
                               </div>
                            </div>
                            <div class="col-md-12">
                               <div class="tp-checkout-input">
                                  <label>Email<span>*</span></label>
-                                 <input type="email" name="email" placeholder="Vui lòng nhập email" value="<?= $user['email'] ?>">
+                                 <input type="email" name="email" placeholder="Vui lòng nhập email" value="<?= $user['email'] ?? '' ?>">
                               </div>
                            </div>
                            <div class="col-md-12">
                               <div class="tp-checkout-input">
                                  <label>Địa chỉ<span>*</span></label>
-                                 <input type="text" name="address" placeholder="Vui lòng nhập địa chỉ" value="<?= $user['address'] ?>">
+                                 <input type="text" name="address" placeholder="Vui lòng nhập địa chỉ" value="<?= $user['address'] ?? '' ?>">
                               </div>
                            </div>
                            <div class="col-md-12">
@@ -73,7 +73,6 @@
 
                   <div class="tp-order-info-list">
                      <ul>
-
                         <!-- header -->
                         <li class="tp-order-info-list-header">
                            <h4>Sản phẩm</h4>
@@ -81,22 +80,39 @@
                         </li>
 
                         <!-- item list -->
-                        <?php foreach ($carts as $cart) { ?>
+                        <?php if (!empty($carts)) { ?>
+                           <?php foreach ($carts as $cart) { ?>
+                              <li class="tp-order-info-list-desc">
+                                 <p><?= $cart['pro_name'] ?> <span> x <?= $cart['quantity'] ?></span></p>
+                                 <span><?= number_format($cart['pro_var_sale_price'] * 1000) ?>đ</span>
+                              </li>
+                           <?php } ?>
+                        <?php } else { ?>
                            <li class="tp-order-info-list-desc">
-                              <p><?= $cart['pro_name'] ?> <span> x <?= $cart['quantity'] ?></span></p>
-                              <span><?= number_format($cart['pro_var_sale_price'] * 1000) ?>đ</span>
+                              <input type="hidden" name="role_id" value="3">
+                              <input type="hidden" name="pro_id" value="<?= $_SESSION['guest'][0]['pro_id'] ?>">
+                              <input type="hidden" name="variant_id" value="<?= $_SESSION['guest'][0]['var_id'] ?>">
+                              <input type="hidden" name="quantity" value="<?= $_SESSION['guest']['quantity'] ?>">
+                              <p><?= $_SESSION['guest'][0]['pro_name'] ?> <span> x <?= $_SESSION['guest']['quantity'] ?></span></p>
+                              <span><?= number_format($_SESSION['guest'][0]['var_sale_price'] * 1000) ?>đ</span>
                            </li>
                         <?php } ?>
 
                         <!-- subtotal -->
                         <li class="tp-order-info-list-subtotal">
-                           <span>Giá tiền</span>
-                           <input type="hidden" name="amount" value="<?= $_SESSION['total'] ?>">
-                           <span><?= number_format($_SESSION['total'] * 1000) ?>đ</span>
+                           <?php if (!empty($carts)) { ?>
+                              <span>Giá tiền</span>
+                              <input type="hidden" name="amount" value="<?= $_SESSION['total'] ?>">
+                              <span><?= number_format($_SESSION['total'] * 1000) ?? '' ?>đ</span>
+                           <?php } else { ?>
+                              <span>Giá tiền</span>
+                              <input type="hidden" name="amount" value="<?= $_SESSION['guest']['total'] ?>">
+                              <span><?= number_format($_SESSION['guest']['total'] * 1000) ?? '' ?>đ</span>
+                           <?php } ?>
                         </li>
                         <?php if (isset($_SESSION['coupon'])) { ?>
                            <li class="tp-order-info-list-subtotal">
-                              <input type="hidden" name="cou_id" value="<?= $_SESSION['coupon']['cou_id'] ?>">
+                              <input type="hidden" name="cou_id" value="<?= $_SESSION['coupon']['cou_id'] ?? '' ?>">
                               <span>Mã giảm giá</span>
                               <span>-<?= number_format($_SESSION['totalCoupon'] * 1000) ?>đ</span>
                            </li>
@@ -120,6 +136,11 @@
                            <li class="tp-order-info-list-total">
                               <span>Thành tiền</span>
                               <span><?= number_format(($_SESSION['total'] - ($_SESSION['totalCoupon'] ?? 0)) * 1000) ?>đ</span>
+                           </li>
+                        <?php } elseif (!empty($_SESSION['guest']['total'])) { ?>
+                           <li class="tp-order-info-list-total">
+                              <span>Thành tiền</span>
+                              <span><?= number_format(($_SESSION['guest']['total'] ?? 0) * 1000) ?>đ</span>
                            </li>
                         <?php } else { ?>
                            <li class="tp-order-info-list-total">

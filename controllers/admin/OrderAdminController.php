@@ -22,6 +22,7 @@ class OrderAdminController extends order
     }
     public function orderById()
     {
+        $orders = $this->getAllOrderDetail();
         $orderById = $this->getOrderById($_GET['id']);
         $detailById = $this->getOrderDetailById($_GET['id']);
         $coupons = $this->getCouponById($_GET['id']);

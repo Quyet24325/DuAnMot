@@ -5,52 +5,20 @@ class cartController extends cart
 
     public function index()
     {
-        $cart = $this->getAllCart();
-        $sum = 0;
-        foreach ($cart as $car) {
-            $sum += $car['pro_var_sale_price'] * $car['quantity'];
+        if (!empty($_SESSION['user'])) {
+            $cart = $this->getAllCart();
+            $sum = 0;
+            foreach ($cart as $car) {
+                $sum += $car['pro_var_sale_price'] * $car['quantity'];
+            }
+            $_SESSION['total'] = $sum;
         }
-        $_SESSION['total'] = $sum;
+
         include '../view/client/cart/cart.php';
     }
     public function addToCartOrByNow()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
-            if ($_SESSION['user'] == '') {
-                $_SESSION['error'] = 'Vui lòng đăng nhập';
-                header('location:indext.php?act=login');
-                exit();
-            } else {
-                if (empty($_POST['variant_id'])) {
-                    $_SESSION['error'] = 'vui lòng chọn màu sắc và size sản phẩm.';
-                    header('location:' . $_SERVER['HTTP_REFERER']);
-                    exit();
-                }
-                $checkCart = $this->checkCart();
-                if ($checkCart) {
-                    $quantity = $checkCart['quantity'] + $_POST['quantity'];
-                    $updateCart = $this->updateCart(
-                        $_SESSION['user']['user_id'],
-                        $_POST['pro_id'],
-                        $_POST['variant_id'],
-                        $quantity
-                    );
-                    $_SESSION['success'] = 'cập nhật giỏ hàng thành công.';
-                    header('location: ' . $_SERVER['HTTP_REFERER']);
-                    exit();
-                } else {
-                    $addToCart = $this->addToCart(
-                        $_SESSION['user']['user_id'],
-                        $_POST['pro_id'],
-                        $_POST['variant_id'],
-                        $_POST['quantity']
-                    );
-                    $_SESSION['success'] = 'Thêm vào giỏ hàng thành công.';
-                    header('location: ' . $_SERVER['HTTP_REFERER']);
-                    exit();
-                }
-            }
-        } else if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['buy-now'])) {
             if (empty($_POST['variant_id'])) {
                 $_SESSION['error'] = 'vui lòng chọn màu sắc và size sản phẩm.';
                 header('location:' . $_SERVER['HTTP_REFERER']);
@@ -65,8 +33,8 @@ class cartController extends cart
                     $_POST['variant_id'],
                     $quantity
                 );
-                // $_SESSION['success']='cập nhật giỏ hàng thành công.';
-                header('location:?act=cart');
+                $_SESSION['success'] = 'cập nhật giỏ hàng thành công.';
+                header('location: ' . $_SERVER['HTTP_REFERER']);
                 exit();
             } else {
                 $addToCart = $this->addToCart(
@@ -75,10 +43,19 @@ class cartController extends cart
                     $_POST['variant_id'],
                     $_POST['quantity']
                 );
-                // $_SESSION['success']='Thêm vào giỏ hàng thành công.';
-                header('location:?act=cart');
+                $_SESSION['success'] = 'Thêm vào giỏ hàng thành công.';
+                header('location: ' . $_SERVER['HTTP_REFERER']);
                 exit();
             }
+            // }
+        } else if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['thanhtoan'])) {
+            $_SESSION['guest'] = $this->getProductVariantId($_POST['pro_id']);
+            $_SESSION['guest']['quantity'] = $_POST['quantity'];
+            $_SESSION['guest']['total'] = $_POST['quantity'] * $_SESSION['guest'][0]['var_sale_price'];
+            // echo '<pre>';
+            // print_r($_SESSION['guest']);    
+
+            header('location: indext.php?act=checkout');
         }
     }
 

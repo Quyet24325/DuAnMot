@@ -16,13 +16,13 @@
                                     <li><?= date('d-m-Y \a\t g:i a', strtotime($detailById['created_at'])) ?></li>
                                 </ul>
                             </div>
-                            <form action="indext.php?act=update_order&detail_id=<?=$detailById['detail_id']?>" method="post">
+                            <form action="indext.php?act=update_order&detail_id=<?= $detailById['detail_id'] ?>" method="post">
                                 <div class="d-flex align-items-center mt-2">
                                     <select class="form-select" style="width: 150px;" aria-label="Default select example" name="status">
                                         <option value="Pending" <?= $detailById['status'] == 'Pending' ? 'selected' : '' ?>>Pending</option>
                                         <option value="Confirmend" <?= $detailById['status'] == 'Confirmend' ? 'selected' : '' ?>>Confirmend</option>
-                                        <option value="Shipped"<?= $detailById['status'] == 'Shipped' ? 'selected' : '' ?>>Shipped</option>
-                                        <option value="Delivered"<?= $detailById['status'] == 'Delivered' ? 'selected' : '' ?>>Delivered</option>
+                                        <option value="Shipped" <?= $detailById['status'] == 'Shipped' ? 'selected' : '' ?>>Shipped</option>
+                                        <option value="Delivered" <?= $detailById['status'] == 'Delivered' ? 'selected' : '' ?>>Delivered</option>
                                         <option value="Canceled" <?= $detailById['status'] == 'Canceled' ? 'selected' : '' ?>>Canceled</option>
                                     </select>
                                     <button class="btn btn-primary ms-3" name="update_order">Edit</button>
@@ -36,6 +36,27 @@
                                         <table class="table cart-table table-borderless">
                                             <thead>
                                                 <tr>
+                                                    <th colspan="12">Thông tin của khách hàng </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="col">Tên Khách hàng</th>
+                                                    <th scope="col">Số điện thoại</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Địa chỉ</th>
+                                                    <th scope="col">Ghi chú</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><?= $orders[0]['name'] ?></td>
+                                                    <td><?= $orders[0]['phone'] ?></td>
+                                                    <td><?= $orders[0]['email'] ?></td>
+                                                    <td><?= $orders[0]['address'] ?></td>
+                                                    <td><?= $orders[0]['note'] ?></td>
+                                                </tr>
+                                            </tbody>
+                                            <thead>
+                                                <tr>
                                                     <th colspan="12">Đơn hàng</th>
                                                 </tr>
                                             </thead>
@@ -46,9 +67,9 @@
                                                             <img src="./images/product/<?= $order['pro_image'] ?>" class="img-fluid blur-up lazyload" alt="">
                                                         </td>
                                                         <td>
-                                                            <h5><?= $order['pro_name'] ?>  x <?= $order['quantity'] ?></h5>
+                                                            <h5><?= $order['pro_name'] ?> x <?= $order['quantity'] ?></h5>
                                                             <p class="mt-3">Màu:<?= $order['var_color'] ?></p>
-                                                            <p class="mt-1">Dung lượng:<?= $order['var_size'] ?></p>
+                                                            <p class="mt-1">Size:<?= $order['var_size'] ?></p>
                                                         </td>
                                                         <td>
                                                             <p>Giá tiền</p>

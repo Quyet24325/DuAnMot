@@ -104,7 +104,12 @@
                                 <input class="cart-plus-minus-box quantity-variants" type="text" name="quantity" value="1">
                             </div>
                             <div class="pro-details-cart btn-hover">
-                                <button name="add_to_cart" class="tp-product-details-add-to-cart-btn w-100">Thêm vào giỏ hàng</button>
+                                <?php if (empty($_SESSION['user'])) { ?>
+                                    
+                                    <button name="thanhtoan" class="tp-product-details-add-to-cart-btn w-100">Thanh toán</button>
+                                <?php } else { ?>
+                                    <button name="add_to_cart" class="tp-product-details-add-to-cart-btn w-100">Thêm vào giỏ hàng</button>
+                                <?php } ?>
                             </div>
                             <div class="pro-details-wishlist">
                                 <a href="#"><i class="fa fa-heart-o"></i></a>

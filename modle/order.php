@@ -10,6 +10,20 @@ class order extends connect
         return $stmt->execute([$_SESSION['user']['user_id'], $pro_id, $var_id, $quantity, $detail_id]);
     }
 
+    public function addOrderGest($pro_id,$user_id, $var_id, $detail_id, $quantity)
+    {
+        $sql = "insert into orders (pro_id,user_id,var_id,detail_id,quantity,created_at,updated_at) value (?,?,?,?,?,now(),now())";
+        $stmt = $this->connect()->prepare($sql);
+        return $stmt->execute([$pro_id,$user_id, $var_id, $quantity, $detail_id]);
+    }
+
+    public function addOrrderDetailGuest($name,$user_id, $email, $phone, $address, $amount, $note, $ship_id,  $payment)
+    {
+        $sql = "insert into order_details (name,user_id, email, phone, address, amount, note,  ship_id, payment, created_at, updated_at) values (?,?,?,?,?,?,?,?,?,now(),now())";
+        $stmt = $this->connect()->prepare($sql);
+        return $stmt->execute([$name,$user_id, $email, $phone, $address, $amount, $note,  $ship_id,  $payment]);
+    }
+
     public function addOrrderDetail($name, $email, $phone, $address, $amount, $note, $ship_id, $cou_id, $payment)
     {
         $sql = "insert into order_details (name, email, phone, address, amount, note, user_id, ship_id, cou_id, payment, created_at, updated_at) values (?,?,?,?,?,?,?,?,?,?,now(),now())";
@@ -18,6 +32,12 @@ class order extends connect
     }
 
     public function getLastInsertId()
+    {
+        //Lấy id đơn hàng vừa thêm
+        return $this->connect()->lastInsertId();
+    }
+
+    public function getLastGuestId()
     {
         //Lấy id đơn hàng vừa thêm
         return $this->connect()->lastInsertId();
@@ -116,10 +136,18 @@ class order extends connect
         $stmt->execute([$_SESSION['user']['user_id']]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-    public function cancelOrder(){
+
+    public function cancelOrder()
+    {
         $sql = 'update order_details set status = "Canceled",updated_at = now() where detail_id=?';
         $stmt = $this->connect()->prepare($sql);
         return $stmt->execute([$_GET['detail_id']]);
+    }
+
+    public function createGuest($name,$email,$phone,$address)
+    {
+        $sql = "insert into user (name,email,phone,address,role_id) value (?,?,?,?,3)";
+        $stmt = $this->connect()->prepare($sql);
+        return $stmt->execute([$name,$email,$phone,$address]);
     }
 }

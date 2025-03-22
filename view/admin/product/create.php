@@ -87,7 +87,7 @@
                                         <div class="border rounded px-2 mb-4">
                                             <div class="row mb-5">
                                                 <div class="col-lg-6">
-                                                    <label class="col-sm-6 col-form-label form-label-title">Dung lượng</label>
+                                                    <label class="col-sm-6 col-form-label form-label-title">Size</label>
                                                     <div class="sm-6">
                                                         <select name="varian_size[]" id="" style="width: 90%;">
                                                             <?php foreach ($listSize as $size) { ?>
